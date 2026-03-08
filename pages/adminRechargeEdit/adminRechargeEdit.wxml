@@ -1,0 +1,72 @@
+<!-- 充值记录编辑页面 -->
+<view class="page-container">
+  <!-- 表单内容 -->
+  <scroll-view class="form-container" scroll-y>
+    <!-- 充值用户 -->
+    <view class="form-group">
+      <text class="form-label">充值用户</text>
+      <input class="form-input" value="{{account}}" disabled placeholder="充值用户账号" />
+    </view>
+
+    <!-- 充值金额 -->
+    <view class="form-group">
+      <text class="form-label">充值金额</text>
+      <input class="form-input" type="digit" value="{{amount}}" bindinput="onAmountInput" placeholder="请输入充值金额" />
+    </view>
+
+    <!-- 支付方式 -->
+    <view class="form-group">
+      <text class="form-label">支付方式</text>
+      <picker mode="selector" range="{{paymentMethods}}" range-key="text" value="{{paymentMethodIndex}}" bindchange="onPaymentMethodChange">
+        <view class="form-picker">
+          <text>{{paymentMethods[paymentMethodIndex].text}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 充值状态 -->
+    <view class="form-group">
+      <text class="form-label">充值状态</text>
+      <picker mode="selector" range="{{statusOptions}}" range-key="text" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="form-picker">
+          <text>{{statusOptions[statusIndex].text}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 管理员账号 -->
+    <view class="form-group" wx:if="{{paymentMethodIndex === 3}}">
+      <text class="form-label">操作管理员</text>
+      <input class="form-input" value="{{adminAccount}}" bindinput="onAdminAccountInput" placeholder="请输入管理员账号" />
+    </view>
+
+    <!-- 充值时间 -->
+    <view class="form-group">
+      <text class="form-label">充值时间</text>
+      <picker mode="date" value="{{rechargeDate}}" end="{{maxDate}}" bindchange="onDateChange">
+        <view class="form-picker">
+          <text>{{rechargeDate}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">充值时间</text>
+      <picker mode="time" value="{{rechargeTime}}" bindchange="onTimeChange">
+        <view class="form-picker">
+          <text>{{rechargeTime}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作按钮 -->
+  <view class="bottom-bar">
+    <button class="cancel-btn" bindtap="goBack">取消</button>
+    <button class="submit-btn" bindtap="saveRecharge">保存</button>
+  </view>
+</view>

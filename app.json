@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/userLogin/userLogin",
+    "pages/userRegister/userRegister",
+    "pages/userResetPassword/userResetPassword",
+    "pages/index/index",
+    "pages/walletRecharge/walletRecharge",
+    "pages/setPaymentPassword/setPaymentPassword",
+    "pages/myReservations/myReservations",
+    "pages/mySessions/mySessions",
+    "pages/myConsumptions/myConsumptions",
+    "pages/tableDetail/tableDetail",
+    "pages/playTimer/playTimer",
+    "pages/profile/profile",
+    "pages/userEdit/userEdit",
+    "pages/adminHome/adminHome",
+    "pages/adminLogin/adminLogin",
+    "pages/wechatPay/wechatPay",
+    "pages/alipayPay/alipayPay",
+    "pages/adminUsers/adminUsers",
+    "pages/adminUserCreate/adminUserCreate",
+    "pages/adminUserEdit/adminUserEdit",
+    "pages/adminTables/adminTables",
+    "pages/adminTableCreate/adminTableCreate",
+    "pages/adminTableEdit/adminTableEdit",
+    "pages/adminOrders/adminOrders",
+    "pages/adminOrderReservationEdit/adminOrderReservationEdit",
+    "pages/adminOrderSessionEdit/adminOrderSessionEdit",
+    "pages/adminOrderConsumptionEdit/adminOrderConsumptionEdit",
+    "pages/adminAdmins/adminAdmins",
+    "pages/adminAdminEdit/adminAdminEdit",
+    "pages/adminProfile/adminProfile",
+    "pages/adminRechargeEdit/adminRechargeEdit"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "无人台球室",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f7f7f7"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1677ff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "",
+        "selectedIconPath": ""
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,65 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">编辑进行中订单</view>
+    
+    <view class="form-item">
+      <view class="label">状态</view>
+      <view class="value">{{statusText}}</view>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">选择球桌</view>
+      <picker mode="selector" range="{{tables}}" range-key="name" value="{{tableIndex}}" bindchange="onTableChange">
+        <view class="picker">{{tableIndex >= 0 ? tables[tableIndex].name : '请选择球桌'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">用户账号</view>
+      <input class="input" value="{{account}}" bindinput="onAccount" placeholder="请输入用户账号" />
+    </view>
+
+    <view class="form-item">
+      <view class="label">开始日期</view>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+        <view class="picker">{{startDate || '请选择开始日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">开始时间</view>
+      <picker mode="time" value="{{startHM}}" bindchange="onStartHM">
+        <view class="picker">{{startHM || '请选择开始时间'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">结束日期</view>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDate">
+        <view class="picker">{{endDate || '可为空'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">结束时间</view>
+      <picker mode="time" value="{{endHM}}" bindchange="onEndHM">
+        <view class="picker">{{endHM || '可为空'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">预计时长（分钟）</view>
+      <view class="value">{{duration}}</view>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">预计金额（元）</view>
+      <view class="value">{{estimatedAmount}}</view>
+    </view>
+    
+    <view class="actions">
+      <button class="btn-primary" bindtap="save">保存</button>
+      <button class="btn-secondary" bindtap="cancel">取消</button>
+    </view>
+  </view>
+</view>

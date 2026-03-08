@@ -1,0 +1,76 @@
+<view class="page-container">
+  <view class="top-header">
+    <view class="title">创建账号</view>
+    <view class="subtitle">注册成为新用户，开启台球之旅</view>
+  </view>
+
+  <view class="card">
+    <!-- 用户名 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>用户名</text>
+        <text class="required">*</text>
+      </view>
+      <input class="form-input" placeholder="请输入用户名 (用于登录)" placeholder-class="input-placeholder" value="{{account}}" bindinput="onAccount" />
+      <view class="error-tip" wx:if="{{errors.account}}">{{errors.account}}</view>
+    </view>
+    
+    <!-- 密码 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>密码</text>
+        <text class="required">*</text>
+      </view>
+      <view class="input-wrapper">
+        <input class="form-input" password="{{!passwordVisible}}" placeholder="6-16位字母数字组合" placeholder-class="input-placeholder" value="{{password}}" bindinput="onPassword" />
+        <view class="password-toggle" bindtap="togglePasswordVisibility">
+          {{passwordVisible ? '隐藏' : '显示'}}
+        </view>
+      </view>
+      <view class="error-tip" wx:if="{{errors.password}}">{{errors.password}}</view>
+    </view>
+    
+    <!-- 确认密码 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>确认密码</text>
+        <text class="required">*</text>
+      </view>
+      <view class="input-wrapper">
+        <input class="form-input" password="{{!confirmPasswordVisible}}" placeholder="请再次输入密码" placeholder-class="input-placeholder" value="{{confirm}}" bindinput="onConfirm" />
+        <view class="password-toggle" bindtap="toggleConfirmPasswordVisibility">
+          {{confirmPasswordVisible ? '隐藏' : '显示'}}
+        </view>
+      </view>
+      <view class="error-tip" wx:if="{{errors.confirm}}">{{errors.confirm}}</view>
+    </view>
+    
+    <!-- 昵称 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>昵称</text>
+      </view>
+      <input class="form-input" placeholder="请输入昵称 (选填)" placeholder-class="input-placeholder" value="{{name}}" bindinput="onName" />
+    </view>
+    
+    <!-- 手机号 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>手机号</text>
+      </view>
+      <input class="form-input" type="number" placeholder="请输入手机号 (选填)" placeholder-class="input-placeholder" value="{{phone}}" bindinput="onPhone" />
+      <view class="error-tip" wx:if="{{errors.phone}}">{{errors.phone}}</view>
+    </view>
+    
+    <!-- 注册按钮 -->
+    <view class="mt-40">
+      <button class="btn-primary" bindtap="submitRegister" disabled="{{!canSubmit}}">{{submitting ? '注册中...' : '立即注册'}}</button>
+    </view>
+
+    <!-- 底部链接 -->
+    <view class="link-section" style="justify-content: center;">
+      <text style="color: #666; font-size: 26rpx; margin-right: 10rpx;">已有账号?</text>
+      <text class="link-text" bindtap="goLogin">立即登录</text>
+    </view>
+  </view>
+</view>

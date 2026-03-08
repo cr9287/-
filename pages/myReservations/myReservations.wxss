@@ -1,0 +1,237 @@
+/* 引入全局样式 */
+@import "../../styles/global.wxss";
+
+.reservations-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 预约记录列表 */
+.reservations-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  background: var(--bg-color);
+}
+
+/* 预约卡片 */
+.reservation-card {
+  composes: card;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid #f0f0f0;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.reservation-card:active {
+  transform: scale(0.98);
+  background: #f8f9fa;
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.reservation-table {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.reservation-status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+  color: #666;
+}
+
+.reservation-status.pending {
+  background: #fff7e6;
+  color: #fa8c16;
+  border: 1rpx solid #ffd591;
+}
+
+.reservation-status.confirmed {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1rpx solid #b7eb8f;
+}
+
+.reservation-status.expired {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1rpx solid #ffccc7;
+}
+
+.reservation-status.cancelled {
+  background: #f5f5f5;
+  color: #999;
+  border: 1rpx solid #e0e0e0;
+}
+
+/* 卡片主体 */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.time-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.reservation-date {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.reservation-time {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 状态提示 */
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.warning-text {
+  font-size: 22rpx;
+  color: #fa8c16;
+  background: #fff7e6;
+  padding: 8rpx 12rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #ffd591;
+}
+
+.expired-text {
+  font-size: 22rpx;
+  color: #ff4d4f;
+  background: #fff2f0;
+  padding: 8rpx 12rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #ffccc7;
+}
+
+/* 底部操作按钮 */
+.card-footer {
+  display: flex;
+  gap: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.btn-verify, .btn-cancel {
+  flex: 1;
+  height: 64rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-verify {
+  background: #1677ff;
+  color: white;
+}
+
+.btn-verify:active {
+  background: #0958d9;
+}
+
+.btn-cancel {
+  background: white;
+  color: #666;
+  border: 1rpx solid #e0e0e0;
+}
+
+.btn-cancel:active {
+  background: #f5f5f5;
+}
+
+/* 空状态页面 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  text-align: center;
+  background: #f5f5f5;
+  height: 100vh;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.empty-icon::before {
+  content: "";
+  font-size: 48rpx;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.empty-subtitle {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 32rpx;
+}
+
+.empty-btn {
+  background: #1677ff;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.empty-btn:active {
+  background: #0958d9;
+}
+
+/* 页面底部统计 */
+.page-footer {
+  background: var(--card-bg);
+  padding: var(--space-lg);
+  border-top: 1rpx solid var(--border-color);
+  text-align: center;
+}
+
+.stat-item {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}

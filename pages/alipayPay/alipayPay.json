@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "支付宝",
+  "navigationBarBackgroundColor": "#1677ff",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#1677ff",
+  "backgroundTextStyle": "light",
+  "disableScroll": true
+}

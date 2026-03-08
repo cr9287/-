@@ -1,0 +1,204 @@
+/**index.wxss**/
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 180rpx;
+  box-sizing: content-box;
+}
+.tabbar {
+  position: relative !important;
+  box-shadow: none !important;
+}
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航提示样式 */
+.top-nav-tip {
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+  color: white;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 24rpx 40rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(22, 119, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.status-summary {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16rpx;
+  padding: 28rpx 40rpx;
+  color: #333;
+}
+.summary-item {
+  flex: 1;
+  text-align: center;
+  background: #f0f0f0;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+.summary-item.active { background: #e6f4ff; color:#1677ff; font-weight:600; }
+
+.actions {
+  display: flex;
+  gap: 16rpx;
+  padding: 0 40rpx 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+
+
+.tables-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  padding: 24rpx; 
+  width: 100%; 
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.table-card {
+  width: 48%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+
+.table-card:active {
+  transform: scale(0.98);
+  background-color: #f9f9f9;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.table-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 32rpx;
+  line-height: 1.4;
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+/* 状态标签 */
+.status-badge {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge.AVAILABLE { background: #f6ffed; color: #52c41a; border: 1rpx solid #b7eb8f; }
+.status-badge.IN_USE { background: #e6f4ff; color: #1677ff; border: 1rpx solid #91caff; }
+.status-badge.RESERVED { background: #fff7e6; color: #faad14; border: 1rpx solid #ffe58f; }
+.status-badge.FAULT { background: #fff1f0; color: #f5222d; border: 1rpx solid #ffa39e; }
+
+.table-body {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+/* 价格样式复用全局，这里只做微调 */
+.price-container {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8rpx;
+}
+
+.table-number {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 实时计费信息 */
+.realtime-charge {
+  font-size: 24rpx;
+  color: #ff4d4f;
+  margin-top: 8rpx;
+  font-weight: 500;
+}
+
+/* 预约时段提示 */
+.reserve-tip {
+  font-size: 22rpx;
+  color: #faad14;
+  margin-top: 8rpx;
+  background: #fffbe6;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  display: inline-block;
+}
+
+.usage-tip {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 空状态样式 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #999;
+}
+
+.empty-state .empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-state .empty-text {
+  font-size: 28rpx;
+}
+
+/* 时间段选择卡片 */
+.time-picker { padding: 24rpx 32rpx; }
+.time-row { display:flex; align-items:center; gap: 20rpx; margin-bottom: 12rpx; }
+.picker-text { font-size: 36rpx; font-weight: 600; }
+.nextday { display:flex; align-items:center; gap: 8rpx; }
+
+/* 底部管理员入口样式 */
+.footer-admin {
+  padding: 20rpx 0 40rpx;
+  text-align: center;
+}
+.footer-link {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: underline;
+}
+.footer-link:active { color: #666; }

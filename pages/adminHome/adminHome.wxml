@@ -1,0 +1,72 @@
+<view class="page-container">
+  <scroll-view class="scrollarea" scroll-y refresher-enabled="true" refresher-triggered="{{refreshing}}" bindrefresherrefresh="onRefresh">
+    <!-- 顶部导航提示 -->
+    <view class="top-nav-tip">
+      点击您要管理的功能模块
+    </view>
+    
+    <!-- 功能模块卡片网格 -->
+    <view class="tables-container">
+      <!-- 用户管理卡片 -->
+      <view class="table-card card" bindtap="goUsers">
+        <view class="table-header">
+          <text class="table-name">用户管理</text>
+          <view class="status-badge AVAILABLE">管理</view>
+        </view>
+        <view class="table-body">
+          <text class="usage-tip">账号管理、余额操作</text>
+        </view>
+      </view>
+      
+      <!-- 球桌管理卡片 -->
+      <view class="table-card card" bindtap="goTables">
+        <view class="table-header">
+          <text class="table-name">球桌管理</text>
+          <view class="status-badge IN_USE">管理</view>
+        </view>
+        <view class="table-body">
+          <text class="usage-tip">状态维护、排期管理</text>
+        </view>
+      </view>
+      
+      <!-- 订单管理卡片 -->
+      <view class="table-card card" bindtap="goOrders">
+        <view class="table-header">
+          <text class="table-name">订单管理</text>
+          <view class="status-badge RESERVED">管理</view>
+        </view>
+        <view class="table-body">
+          <text class="usage-tip">订单查询、结算退款</text>
+        </view>
+      </view>
+      
+      <!-- 管理员管理卡片 -->
+      <view class="table-card card" bindtap="goAdmins">
+        <view class="table-header">
+          <text class="table-name">管理员管理</text>
+          <view class="status-badge IN_USE">管理</view>
+        </view>
+        <view class="table-body">
+          <text class="usage-tip">权限分配、账号维护</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 底部操作按钮区域 -->
+    <view class="bottom-actions">
+      <view class="action-section">
+        <view class="action-buttons">
+          <button class="action-btn logout-btn" bindtap="logout">
+            <text class="btn-text">退出登录</text>
+          </button>
+          <button class="action-btn edit-btn" bindtap="demoteToUser" wx:if="{{!isSuperAdmin}}">
+            <text class="btn-text">降级</text>
+          </button>
+          <button class="action-btn delete-btn" bindtap="deleteAccount" wx:if="{{!isSuperAdmin}}">
+            <text class="btn-text">注销账号</text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

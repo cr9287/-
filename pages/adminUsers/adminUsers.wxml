@@ -1,0 +1,76 @@
+<scroll-view class="admin-users" scroll-y enable-flex>
+  <view class="page-header-row">
+    <text class="page-title">用户管理</text>
+    <text class="page-subtitle">用户总数：{{users.length}}</text>
+  </view>
+  
+  <!-- 批量操作栏 -->
+  <view class="batch-operations" wx:if="{{batchMode}}">
+    <view class="batch-info">
+      <text class="batch-text">已选择 {{selectedCount}} 项</text>
+    </view>
+    <view class="batch-actions">
+      <view class="batch-btn batch-select-all" bindtap="toggleSelectAll">
+        <text>{{isAllSelected ? '取消全选' : '全选'}}</text>
+      </view>
+      <view class="batch-btn batch-delete" bindtap="batchDelete">
+        <text>批量删除</text>
+      </view>
+      <view class="batch-btn batch-cancel" bindtap="exitBatchMode">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 进入批量模式按钮 -->
+  <view class="enter-batch-mode" wx:if="{{!batchMode}}">
+    <view class="batch-btn" bindtap="enterBatchMode">
+      <text>批量操作</text>
+    </view>
+  </view>
+  
+  <view class="user-list">
+    <block wx:for="{{users}}" wx:key="account">
+      <view class="user-card {{batchMode ? 'batch-mode' : ''}}">
+        <!-- 选择框 -->
+        <view class="checkbox-container" wx:if="{{batchMode}}">
+          <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectUser" data-index="{{index}}">
+            <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+          </view>
+        </view>
+        <view class="card-left">
+          <view class="info-row">
+            <text class="user-name">{{item.account}}</text>
+            <text class="spacer"></text> <!-- 竖线改为空格 -->
+            <text class="info-tag">{{item.displayName}}</text>
+            <text class="divider">|</text>
+            <text class="info-tag {{item.balanceClass}}">余额: ¥{{item.walletBalanceText}}</text> <!-- 调整冒号 -->
+            <text class="divider">|</text>
+            <text class="info-tag-date">{{item.lastConsumption}}</text>
+          </view>
+        </view>
+        <view class="card-right">
+          <view class="action-buttons" wx:if="{{!batchMode}}">
+            <view bindtap="goEdit" data-account="{{item.account}}" class="mini-btn btn-edit">
+              <text>编辑</text>
+            </view>
+            <view bindtap="deleteUser" data-user="{{item}}" class="mini-btn btn-delete">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <block wx:if="{{users.length === 0}}">
+      <view class="empty-state">
+        <view class="empty-text">暂无用户数据</view>
+      </view>
+    </block>
+  </view>
+  
+  <view class="add-btn-pill" bindtap="goCreate">
+    <text class="add-icon">+</text>
+    <text class="add-text">新增用户</text>
+  </view>
+</scroll-view>

@@ -1,0 +1,68 @@
+<!-- 管理员我的页面 -->
+<scroll-view class="page-container" scroll-y enable-flex>
+  <!-- 顶部管理员信息显示 -->
+  <view class="card card-primary p-30 mb-30">
+    <view class="flex-column gap-20">
+      <view class="flex-between">
+        <view class="flex-column">
+          <text class="text-xl text-bold text-white mb-10">{{adminInfo.name || adminInfo.account || '管理员'}}</text>
+          <view class="flex-start gap-10">
+            <text class="text-white" style="opacity: 0.9; font-size: 26rpx;">角色</text>
+            <text class="text-xl text-bold text-white">{{adminInfo.role === 'SUPER_ADMIN' ? '超级管理员' : '普通管理员'}}</text>
+          </view>
+          <view class="flex-start gap-10 mt-10">
+            <text class="text-white" style="opacity: 0.9; font-size: 26rpx;">创建时间</text>
+            <text class="text-lg text-white">{{adminInfo.createTime || '未知'}}</text>
+          </view>
+        </view>
+        <!-- 管理员标识图标 -->
+        <view class="admin-badge">
+          <text class="badge-text">{{adminInfo.role === 'SUPER_ADMIN' ? '超级' : '管理'}}</text>
+        </view>
+      </view>
+      
+      <view class="flex-start gap-20 mt-10">
+      </view>
+    </view>
+  </view>
+
+  <!-- 系统管理功能 -->
+  <view class="section-title">系统管理</view>
+  
+  <view class="card flex-between p-30 mb-20" bindtap="goUsers">
+    <view class="flex-start gap-15">
+      <text class="text-lg">用户管理</text>
+    </view>
+    <text class="text-sub">></text>
+  </view>
+  
+  <view class="card flex-between p-30 mb-20" bindtap="goTables">
+    <view class="flex-start gap-15">
+      <text class="text-lg">球桌管理</text>
+    </view>
+    <text class="text-sub">></text>
+  </view>
+  
+  <view class="card flex-between p-30 mb-20" bindtap="goOrders">
+    <view class="flex-start gap-15">
+      <text class="text-lg">订单管理</text>
+    </view>
+    <text class="text-sub">></text>
+  </view>
+
+  <!-- 个人功能 -->
+  <view class="section-title">个人中心</view>
+  
+  <view class="card flex-between p-30 mb-20" bindtap="goAdmins">
+    <view class="flex-start gap-15">
+      <text class="text-lg">管理员管理</text>
+    </view>
+    <text class="text-sub">></text>
+  </view>
+
+  <!-- 安全操作 -->
+  <view class="mt-30">
+    <button class="btn bg-white text-primary mb-20" bindtap="logout">退出登录</button>
+    <button wx:if="{{adminInfo.role !== 'SUPER_ADMIN'}}" class="btn bg-white text-danger" bindtap="deleteAccount">注销账号</button>
+  </view>
+</scroll-view>

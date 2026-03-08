@@ -1,0 +1,123 @@
+/* 充值记录编辑页面样式 */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 页面头部 */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.back-icon {
+  font-size: 24px;
+  color: #1677ff;
+}
+
+.header-title {
+  font-size: 15px;
+  color: #1677ff;
+}
+
+.page-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #000;
+}
+
+.header-right {
+  width: 60px;
+}
+
+/* 表单容器 */
+.form-container {
+  flex: 1;
+  padding: 15px;
+}
+
+/* 表单组 */
+.form-group {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.form-input,
+.form-picker,
+.form-textarea {
+  width: 100%;
+  font-size: 15px;
+  color: #000;
+  background-color: transparent;
+}
+
+.form-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.picker-arrow {
+  font-size: 18px;
+  color: #999;
+}
+
+.form-textarea {
+  height: 100px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-top: 1px solid #e8e8e8;
+}
+
+.cancel-btn,
+.submit-btn {
+  flex: 1;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.submit-btn {
+  background-color: #1677ff;
+  color: #fff;
+}

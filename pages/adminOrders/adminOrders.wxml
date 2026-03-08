@@ -1,0 +1,530 @@
+<view class="page-container">
+  <!-- 操作按钮区域 -->
+  <view class="action-section" wx:if="{{!batchMode}}">
+    <view class="action-btns">
+      <view class="action-btn recharge-btn" bindtap="openRechargeModal">
+        <text>为用户充值</text>
+      </view>
+      <view class="action-btn batch-btn" bindtap="enterBatchMode">
+        <text>批量操作</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 批量操作栏 -->
+  <view class="batch-section" wx:if="{{batchMode}}">
+    <view class="batch-info">
+      <text class="batch-text">已选择 {{selectedCount}} 项</text>
+    </view>
+    <view class="batch-actions">
+      <view class="batch-action-btn select-all-btn" bindtap="toggleSelectAll">
+        <text>{{isAllSelected ? '取消全选' : '全选'}}</text>
+      </view>
+      <view class="batch-action-btn delete-btn {{selectedCount === 0 ? 'disabled' : ''}}" bindtap="batchDelete">
+        <text>批量删除</text>
+      </view>
+      <view class="batch-action-btn cancel-btn" bindtap="exitBatchMode">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+  <!-- 标签筛选栏 -->
+  <view class="tab-bar">
+    <view class="tab {{activeTab=='reservations'?'active':''}}" data-tab="reservations" bindtap="switchTab">
+      <text>预约订单</text>
+    </view>
+    <view class="tab {{activeTab=='sessions'?'active':''}}" data-tab="sessions" bindtap="switchTab">
+      <text>进行中</text>
+    </view>
+    <view class="tab {{activeTab=='consumptions'?'active':''}}" data-tab="consumptions" bindtap="switchTab">
+      <text>已完成</text>
+    </view>
+    <view class="tab {{activeTab=='recharges'?'active':''}}" data-tab="recharges" bindtap="switchTab">
+      <text>充值记录</text>
+    </view>
+  </view>
+
+  <!-- 筛选条件区域 -->
+  <view class="filter-section">
+    <view class="filter-row">
+      <input class="search-input" placeholder="按用户账号查询" value="{{filterUser}}" bindinput="onFilterUser" />
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+        <view class="date-picker">开始: {{startDate||'不限'}}</view>
+      </picker>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDate">
+        <view class="date-picker">结束: {{endDate||'不限'}}</view>
+      </picker>
+      <view class="clear-btn" bindtap="clearDates">
+        <text>清空</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约订单列表 -->
+  <block wx:if="{{activeTab=='reservations'}}">
+    <scroll-view class="order-list" scroll-y enable-flex>
+      <block wx:for="{{displayReservations}}" wx:key="id">
+        <view class="order-card {{batchMode ? 'batch-mode' : ''}}">
+          <!-- 选择框 -->
+          <view class="checkbox-container" wx:if="{{batchMode}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectReservation" data-index="{{index}}">
+              <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+            </view>
+          </view>
+          
+          <!-- 第一行：球桌与时间 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="table-name">球桌 {{item.tableName}}</text>
+            </view>
+            <view class="row-right">
+              <text class="time-text">{{item.timeRange}}</text>
+            </view>
+          </view>
+          
+          <!-- 第二行：用户信息 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="user-text">用户：{{item.account}}</text>
+            </view>
+            <view class="row-right" wx:if="{{item.phone}}">
+              <text class="phone-text">电话：{{item.phone}}</text>
+            </view>
+          </view>
+          
+          <!-- 第三行：状态与金额 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="status-text status-{{item.status.toLowerCase()}}">{{item.statusText}}</text>
+            </view>
+            <view class="row-right">
+              <text class="amount-text">¥{{item.totalAmount || 0}}</text>
+            </view>
+          </view>
+          
+          <!-- 第四行：操作按钮 -->
+          <view class="card-row" wx:if="{{!batchMode}}">
+            <view class="action-buttons">
+              <!-- 待支付/进行中：显示编辑和删除按钮 -->
+              <block wx:if="{{item.status === 'PENDING' || item.status === 'ACTIVE'}}">
+                <view bindtap="editReservation" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+                <view bindtap="deleteReservation" data-id="{{item.id}}" class="action-btn delete-btn">
+                  <text>删除</text>
+                </view>
+              </block>
+              
+              <!-- 已完成：显示编辑按钮 -->
+              <block wx:if="{{item.status === 'COMPLETED' || item.status === 'PAID'}}">
+                <view bindtap="editReservation" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+              </block>
+              
+              <!-- 已取消：显示灰色标签 -->
+              <block wx:if="{{item.status === 'CANCELLED' || item.status === 'CANCELED' || item.status === 'EXPIRED'}}">
+                <view class="status-tag cancelled-tag">
+                  <text>已取消</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displayReservations.length === 0}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无预约订单</view>
+          <view class="empty-hint">当前筛选条件下没有找到预约订单</view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+
+  <!-- 进行中订单（会话）列表 -->
+  <block wx:if="{{activeTab=='sessions'}}">
+    <scroll-view class="order-list" scroll-y enable-flex>
+      <block wx:for="{{displaySessions}}" wx:key="id">
+        <view class="order-card {{batchMode ? 'batch-mode' : ''}}">
+          <!-- 选择框 -->
+          <view class="checkbox-container" wx:if="{{batchMode}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectSession" data-index="{{index}}">
+              <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+            </view>
+          </view>
+          
+          <!-- 第一行：球桌与时间 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="table-name" wx:if="{{item.tableName}}">球桌 {{item.tableName}}</text>
+            </view>
+            <view class="row-right">
+              <text class="time-text">{{item.startText}} - {{item.endText || '进行中'}}</text>
+            </view>
+          </view>
+          
+          <!-- 第二行：用户信息 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="user-text">用户：{{item.userId}}</text>
+            </view>
+            <view class="row-right" wx:if="{{item.phone}}">
+              <text class="phone-text">电话：{{item.phone}}</text>
+            </view>
+          </view>
+          
+          <!-- 第三行：状态与金额 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="status-text {{item.statusText === '进行中' ? 'status-active' : 'status-completed'}}">{{item.statusText || '进行中'}}</text>
+            </view>
+            <view class="row-right">
+              <text class="amount-text">¥{{item.amount || 0}}</text>
+            </view>
+          </view>
+          
+          <!-- 第四行：操作按钮 -->
+          <view class="card-row" wx:if="{{!batchMode}}">
+            <view class="action-buttons">
+              <!-- 进行中：显示编辑和删除按钮 -->
+              <block wx:if="{{!item.endDateTime && !item.endAt}}">
+                <view bindtap="editSession" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+                <view bindtap="deleteSession" data-id="{{item.id}}" class="action-btn delete-btn">
+                  <text>删除</text>
+                </view>
+              </block>
+              
+              <!-- 已完成：显示编辑按钮 -->
+              <block wx:if="{{item.endDateTime || item.endAt}}">
+                <view bindtap="editSession" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displaySessions.length === 0 && activeTab === 'sessions'}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无进行中订单</view>
+          <view class="empty-hint">当前筛选条件下没有找到进行中的订单</view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displaySessions.length === 0 && activeTab === 'completed'}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无已完成订单</view>
+          <view class="empty-hint">当前筛选条件下没有找到已完成的订单</view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+
+  <!-- 已完成订单（会话）列表 -->
+  <block wx:if="{{activeTab=='completed'}}">
+    <scroll-view class="order-list" scroll-y enable-flex>
+      <block wx:for="{{displaySessions}}" wx:key="id">
+        <view class="order-card {{batchMode ? 'batch-mode' : ''}}">
+          <!-- 选择框 -->
+          <view class="checkbox-container" wx:if="{{batchMode}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectSession" data-index="{{index}}">
+              <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+            </view>
+          </view>
+          
+          <!-- 第一行：球桌与时间 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="table-name" wx:if="{{item.tableName}}">球桌 {{item.tableName}}</text>
+            </view>
+            <view class="row-right">
+              <text class="time-text">{{item.startText}} - {{item.endText}}</text>
+            </view>
+          </view>
+          
+          <!-- 第二行：用户信息 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="user-text">用户：{{item.userId}}</text>
+            </view>
+            <view class="row-right" wx:if="{{item.phone}}">
+              <text class="phone-text">电话：{{item.phone}}</text>
+            </view>
+          </view>
+          
+          <!-- 第三行：状态与金额 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="status-text status-completed">{{item.statusText || '已完成'}}</text>
+            </view>
+            <view class="row-right">
+              <text class="amount-text">¥{{item.amount || 0}}</text>
+            </view>
+          </view>
+          
+          <!-- 第四行：操作按钮 -->
+          <view class="card-row" wx:if="{{!batchMode}}">
+            <view class="action-buttons">
+              <view bindtap="editSession" data-id="{{item.id}}" class="action-btn edit-btn">
+                <text>编辑</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displaySessions.length === 0}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无已完成订单</view>
+          <view class="empty-hint">当前筛选条件下没有找到已完成的订单</view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+
+  <!-- 已完成订单（消费）列表 -->
+  <block wx:if="{{activeTab=='consumptions'}}">
+    <scroll-view class="order-list" scroll-y enable-flex>
+      <block wx:for="{{displayConsumptions}}" wx:key="id">
+        <view class="order-card {{batchMode ? 'batch-mode' : ''}}">
+          <!-- 选择框 -->
+          <view class="checkbox-container" wx:if="{{batchMode}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectConsumption" data-index="{{index}}">
+              <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+            </view>
+          </view>
+          
+          <!-- 第一行：球桌与时间 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="table-name" wx:if="{{item.tableName}}">球桌 {{item.tableName}}</text>
+            </view>
+            <view class="row-right">
+              <text class="time-text">{{item.periodText}}</text>
+            </view>
+          </view>
+          
+          <!-- 第二行：用户信息 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="user-text">用户：{{item.userId}}</text>
+            </view>
+            <view class="row-right" wx:if="{{item.phone}}">
+              <text class="phone-text">电话：{{item.phone}}</text>
+            </view>
+          </view>
+          
+          <!-- 第三行：状态与金额 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="status-text status-{{item.statusClass}}">{{item.statusText}}</text>
+            </view>
+            <view class="row-right">
+              <text class="amount-text">¥{{item.amountText}}</text>
+            </view>
+          </view>
+          
+          <!-- 第四行：操作按钮 -->
+          <view class="card-row" wx:if="{{!batchMode}}">
+            <view class="action-buttons">
+              <!-- 已完成：显示编辑和删除按钮 -->
+              <block wx:if="{{item.status === 'COMPLETED' || item.status === 'PAID'}}">
+                <view bindtap="editConsumption" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+                <view bindtap="deleteConsumption" data-id="{{item.id}}" class="action-btn delete-btn">
+                  <text>删除</text>
+                </view>
+              </block>
+              
+              <!-- 已取消：显示灰色标签 -->
+              <block wx:if="{{item.status === 'CANCELLED' || item.status === 'CANCELED'}}">
+                <view class="status-tag cancelled-tag">
+                  <text>已取消</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displayConsumptions.length === 0}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无已完成订单</view>
+          <view class="empty-hint">当前筛选条件下没有找到已完成的订单</view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+
+  <!-- 充值记录列表 -->
+  <block wx:if="{{activeTab=='recharges'}}">
+    <scroll-view class="order-list" scroll-y enable-flex>
+      <block wx:for="{{displayRecharges}}" wx:key="id">
+        <view class="order-card {{batchMode ? 'batch-mode' : ''}}">
+          <!-- 选择框 -->
+          <view class="checkbox-container" wx:if="{{batchMode}}">
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectRecharge" data-index="{{index}}">
+              <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+            </view>
+          </view>
+          
+          <!-- 第一行：用户账号与时间 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="table-name">{{item.account}}</text>
+            </view>
+            <view class="row-right">
+              <text class="time-text">{{item.rechargeTime}}</text>
+            </view>
+          </view>
+          
+          <!-- 第二行：用户信息与支付方式 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="user-text">用户：{{item.userName || '未知用户'}}</text>
+            </view>
+            <view class="row-right">
+              <text class="phone-text">{{item.paymentMethodText}}</text>
+            </view>
+          </view>
+          
+          <!-- 第三行：状态与金额 -->
+          <view class="card-row">
+            <view class="row-left">
+              <text class="status-text status-{{item.statusClass}}">{{item.statusText}}</text>
+            </view>
+            <view class="row-right">
+              <text class="amount-text">¥{{item.amount}}</text>
+            </view>
+          </view>
+          
+          <!-- 第四行：操作按钮 -->
+          <view class="card-row" wx:if="{{!batchMode}}">
+            <view class="action-buttons">
+              <!-- 成功：显示编辑和删除按钮 -->
+              <block wx:if="{{item.status === 'SUCCESS'}}">
+                <view bindtap="editRecharge" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+                <view bindtap="deleteRecharge" data-id="{{item.id}}" class="action-btn delete-btn">
+                  <text>删除</text>
+                </view>
+              </block>
+              
+              <!-- 失败：显示灰色标签 -->
+              <block wx:if="{{item.status === 'FAILED'}}">
+                <view class="status-tag cancelled-tag">
+                  <text>失败</text>
+                </view>
+              </block>
+              
+              <!-- 待处理：显示编辑按钮 -->
+              <block wx:if="{{item.status === 'PENDING'}}">
+                <view bindtap="editRecharge" data-id="{{item.id}}" class="action-btn edit-btn">
+                  <text>编辑</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displayRecharges.length === 0}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无充值记录</view>
+          <view class="empty-hint">当前筛选条件下没有找到充值记录</view>
+        </view>
+      </block>
+    </scroll-view>
+  </block>
+
+  <!-- 充值弹窗 -->
+  <view class="modal-overlay recharge-modal" wx:if="{{showRechargeModal}}">
+    <view class="modal-container recharge-modal-container">
+      <view class="modal-header">
+        <text class="modal-title">为用户充值</text>
+        <view class="modal-close" bindtap="closeRechargeModal">
+          <text>✕</text>
+        </view>
+      </view>
+      
+      <view class="modal-content">
+        <!-- 选择用户 -->
+        <view class="form-group">
+          <text class="form-label">选择用户</text>
+          <picker class="form-select" range="{{users}}" range-key="displayText" value="{{userIndex}}" bindchange="onRechargeUserChange">
+            <view class="picker-text">{{userIndex >= 0 ? users[userIndex].displayText : '请选择用户'}}</view>
+          </picker>
+          <!-- 显示用户余额 -->
+          <view class="user-balance" wx:if="{{userIndex >= 0 && users[userIndex].walletBalance}}">
+            <text>当前余额：¥{{users[userIndex].walletBalance}}</text>
+          </view>
+        </view>
+        
+        <!-- 充值金额 -->
+        <view class="form-group">
+          <text class="form-label">充值金额</text>
+          <!-- 快捷金额按钮 -->
+          <view class="quick-amounts">
+            <view class="quick-amount-btn {{rechargeAmount=='10'?'active':''}}" bindtap="selectQuickAmount" data-amount="10">
+              <text>¥10</text>
+            </view>
+            <view class="quick-amount-btn {{rechargeAmount=='20'?'active':''}}" bindtap="selectQuickAmount" data-amount="20">
+              <text>¥20</text>
+            </view>
+            <view class="quick-amount-btn {{rechargeAmount=='50'?'active':''}}" bindtap="selectQuickAmount" data-amount="50">
+              <text>¥50</text>
+            </view>
+            <view class="quick-amount-btn {{rechargeAmount=='100'?'active':''}}" bindtap="selectQuickAmount" data-amount="100">
+              <text>¥100</text>
+            </view>
+          </view>
+          <input class="form-input recharge-input" type="digit" placeholder="请输入充值金额" value="{{rechargeAmount}}" bindinput="onRechargeAmountInput" />
+          <!-- 金额错误提示 -->
+          <view class="amount-error" wx:if="{{amountError}}">
+            <text>{{amountError}}</text>
+          </view>
+        </view>
+        
+        <!-- 支付方式 -->
+        <view class="form-group">
+          <text class="form-label">支付方式</text>
+          <view class="payment-methods">
+            <view class="payment-method {{rechargePaymentMethod=='WECHAT'?'active':''}}" data-method="WECHAT" bindtap="selectRechargePaymentMethod">
+              <view class="method-radio">
+                <view class="radio-dot {{rechargePaymentMethod=='WECHAT'?'active':''}}"></view>
+              </view>
+              <text>微信支付</text>
+            </view>
+            <view class="payment-method {{rechargePaymentMethod=='ALIPAY'?'active':''}}" data-method="ALIPAY" bindtap="selectRechargePaymentMethod">
+              <view class="method-radio">
+                <view class="radio-dot {{rechargePaymentMethod=='ALIPAY'?'active':''}}"></view>
+              </view>
+              <text>支付宝</text>
+            </view>
+            <view class="payment-method {{rechargePaymentMethod=='CASH'?'active':''}}" data-method="CASH" bindtap="selectRechargePaymentMethod">
+              <view class="method-radio">
+                <view class="radio-dot {{rechargePaymentMethod=='CASH'?'active':''}}"></view>
+              </view>
+              <text>现金</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <view class="modal-btn modal-cancel" bindtap="closeRechargeModal">
+          <text>取消</text>
+        </view>
+        <view class="modal-btn modal-confirm {{!canRecharge?'disabled':''}}" bindtap="doRecharge">
+          <text>确认充值</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

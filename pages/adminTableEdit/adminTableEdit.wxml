@@ -1,0 +1,46 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">编辑球桌</view>
+    <view class="form-item">
+      <text class="label">编号</text>
+      <text class="value">#{{id}}</text>
+    </view>
+    
+    <view class="form-item">
+      <text class="label">球桌名称</text>
+      <input class="input" placeholder="请输入球桌名称" value="{{name}}" bindinput="onName" />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">每小时价格</text>
+      <input class="input" type="number" placeholder="请输入价格" value="{{price}}" bindinput="onPrice" />
+    </view>
+    
+    <!-- 球桌状态选择 -->
+    <view class="form-item">
+      <view class="label">球桌状态</view>
+      <picker mode="selector" range="{{statusOptions}}" range-key="text" value="{{statusIndex}}" bindchange="onStatusChange" class="picker-container">
+        <view class="picker-inner">
+          <text class="picker-value">{{statusOptions[statusIndex].text}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 球桌类型选择 -->
+    <view class="form-item">
+      <view class="label">球桌类型</view>
+      <picker mode="selector" range="{{typeOptions}}" range-key="text" value="{{typeIndex}}" bindchange="onTypeChange" class="picker-container">
+        <view class="picker-inner">
+          <text class="picker-value">{{typeOptions[typeIndex].text}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="actions">
+      <button class="btn" bindtap="cancel">取消</button>
+      <button class="btn-primary" bindtap="save">保存</button>
+    </view>
+  </view>
+</view>

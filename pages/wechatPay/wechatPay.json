@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "微信支付",
+  "navigationBarBackgroundColor": "#07c160",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#07c160",
+  "backgroundTextStyle": "light",
+  "disableScroll": true
+}

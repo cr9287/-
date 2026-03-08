@@ -1,0 +1,116 @@
+/* 全局样式 */
+.timer-page {
+  padding: 20rpx;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 核心信息卡片 */
+.info-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx; /* 10px 间距 */
+}
+
+/* 顶部标题 */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  font-size: 36rpx; /* 18px */
+  font-weight: bold;
+  color: #333;
+}
+
+.header-separator {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 0 10rpx;
+}
+
+.status-badge {
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 28rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-weight: normal;
+}
+
+/* 分隔线 */
+.divider {
+  width: 80%;
+  height: 2rpx;
+  background-color: #eee;
+  margin: 0 auto; /* 居中，间距由 gap 控制 */
+}
+
+/* 数据模块 */
+.data-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0; /* 间距由 gap 控制 */
+}
+
+.label {
+  font-size: 24rpx; /* 12px */
+  color: #999; /* 浅灰色 */
+  margin-bottom: 10rpx;
+}
+
+.value {
+  font-size: 48rpx; /* 24px */
+  font-weight: bold;
+}
+
+.time-value {
+  color: #000;
+}
+
+.cost-value {
+  color: #c00; /* 暗红色 */
+}
+
+/* 计费规则 */
+.rule-section {
+  margin-top: 0; /* 间距由 gap 控制 */
+  text-align: center;
+}
+
+.rule-text {
+  font-size: 24rpx; /* 12px */
+  color: #999;
+}
+
+/* 底部操作按钮 */
+.action-section {
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-end {
+  width: 80% !important;
+  background-color: #1890ff; /* 深蓝色 */
+  color: #fff;
+  font-size: 32rpx; /* 16px */
+  border-radius: 12rpx; /* 6px */
+  padding: 20rpx 0;
+  font-weight: normal;
+}
+
+.btn-end:active {
+  opacity: 0.9;
+}

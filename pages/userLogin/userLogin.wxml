@@ -1,0 +1,59 @@
+<view class="page-container">
+  <view class="system-header">
+    <view class="system-title">无人台球室自助系统</view>
+  </view>
+  
+  <view class="top-header">
+    <view class="title">欢迎回来</view>
+    <view class="subtitle">登录您的账号以继续使用</view>
+  </view>
+
+  <view class="card">
+    <!-- 账号选择器 (如果有历史账号) -->
+    <block wx:if="{{accounts && accounts.length > 0}}">
+      <picker mode="selector" range="{{accounts}}" value="{{selectedIndex < 0 ? 0 : selectedIndex}}" bindchange="onPickUserChange">
+        <view class="account-picker">
+          点击选择已有账号登录
+        </view>
+      </picker>
+      <view class="divider">或使用账号密码登录</view>
+    </block>
+    
+    <!-- 账号输入 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>账号</text>
+      </view>
+      <input class="form-input" type="text" placeholder="请输入用户名" placeholder-class="input-placeholder" value="{{account}}" bindinput="onAccount" />
+    </view>
+    
+    <!-- 密码输入 -->
+    <view class="form-item">
+      <view class="form-label">
+        <text>密码</text>
+      </view>
+      <view class="input-wrapper">
+        <input class="form-input" password="{{!passwordVisible}}" placeholder="请输入密码" placeholder-class="input-placeholder" value="{{password}}" bindinput="onPassword" />
+        <view class="password-toggle" bindtap="togglePasswordVisibility">
+          {{passwordVisible ? '隐藏' : '显示'}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 登录按钮 -->
+    <view class="mt-40">
+      <button class="btn-primary" bindtap="submitLogin" loading="{{loading}}" disabled="{{loading}}">立即登录</button>
+    </view>
+    
+    <!-- 底部链接 -->
+    <view class="link-section">
+      <navigator url="/pages/userResetPassword/userResetPassword" class="link-text">忘记密码?</navigator>
+      <navigator url="/pages/userRegister/userRegister" class="link-text">注册新账号</navigator>
+    </view>
+  </view>
+  
+  <!-- 底部其他选项 -->
+  <view class="text-center mt-40">
+    <text class="link-text" style="color: #999; font-size: 24rpx;" bindtap="goAdmin">管理员入口</text>
+  </view>
+</view>

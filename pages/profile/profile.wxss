@@ -1,0 +1,276 @@
+/* 页面容器 */
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 120rpx;
+}
+
+/* 用户信息卡片 */
+.user-card {
+  background: white;
+  border-radius: 24rpx;
+  margin: 30rpx;
+  padding: 48rpx 40rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid #f0f0f0;
+  color: #333;
+}
+
+.user-info-section {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.user-display {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+  display: block;
+  color: #333;
+}
+
+.user-account {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 余额区域 */
+.balance-section {
+  text-align: center;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.balance-label {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.balance-amount {
+  font-size: 56rpx;
+  font-weight: bold;
+  font-family: 'DIN Alternate', Arial, sans-serif;
+  color: #1677ff;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.balance-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* 功能模块区域 */
+.function-section {
+  padding: 0 30rpx;
+  margin-top: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.function-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.function-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 24rpx 16rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.function-item:active {
+  transform: scale(0.95);
+  background: #f8f9fa;
+}
+
+.item-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  margin: 0 auto 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reservation-icon {
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+}
+
+.session-icon {
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+}
+
+.consumption-icon {
+  background: linear-gradient(135deg, #fa8c16 0%, #d46b08 100%);
+}
+
+.item-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+
+/* 按钮样式 */
+.action-btn {
+  height: 72rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0 32rpx;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.recharge-btn {
+  background: transparent;
+  color: #1677ff;
+  border: none;
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  transition: all 0.2s ease;
+}
+
+.recharge-btn:active {
+  background: rgba(22, 119, 255, 0.1);
+  color: #0958d9;
+}
+
+.edit-btn {
+  background: transparent;
+  color: white;
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+}
+
+.edit-btn:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 底部操作区域 */
+.actions-section {
+  padding: 0 30rpx;
+  margin-top: 40rpx;
+  margin-bottom: 40rpx;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  align-items: center;
+}
+
+.action-btn {
+  width: 85%;
+  height: 88rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.edit-profile-btn {
+  background: #1677ff;
+  color: white;
+}
+
+.edit-profile-btn:active {
+  background: #0958d9;
+}
+
+.logout-btn {
+  background: white;
+  color: #666;
+  border: 1rpx solid #e0e0e0;
+}
+
+.logout-btn:active {
+  background: #f5f5f5;
+}
+
+.delete-btn {
+  background: transparent;
+  color: #ff4d4f;
+  border: 1rpx solid #ff4d4f;
+}
+
+.delete-btn:active {
+  background: rgba(255, 77, 79, 0.05);
+}
+
+/* 空状态和加载状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #999;
+}
+
+.empty-text {
+  font-size: 28rpx;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.loading-text {
+  font-size: 28rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .user-card {
+    margin: 20rpx;
+    padding: 30rpx;
+  }
+  
+  .functions-section {
+    padding: 0 20rpx;
+  }
+  
+  .actions-section {
+    padding: 0 20rpx;
+  }
+}

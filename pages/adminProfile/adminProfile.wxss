@@ -1,0 +1,164 @@
+/* 引入全局样式 */
+@import "../../styles/global.wxss";
+
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  background: var(--bg-color);
+}
+
+/* 卡片样式 */
+.card {
+  composes: card;
+}
+
+.card-primary {
+  composes: card-primary;
+}
+
+.p-30 {
+  padding: var(--space-2xl);
+}
+
+.mb-30 {
+  margin-bottom: var(--space-2xl);
+}
+
+.mb-20 {
+  margin-bottom: var(--space-lg);
+}
+
+.mt-30 {
+  margin-top: var(--space-2xl);
+}
+
+.mt-10 {
+  margin-top: var(--space-sm);
+}
+
+.mb-10 {
+  margin-bottom: var(--space-sm);
+}
+
+/* 布局样式 */
+.flex-column {
+  composes: flex-col;
+}
+
+.flex-between {
+  composes: flex-between;
+}
+
+.flex-start {
+  composes: flex-start;
+}
+
+.gap-20 {
+  gap: var(--space-lg);
+}
+
+.gap-15 {
+  gap: 15rpx;
+}
+
+.gap-10 {
+  gap: var(--space-sm);
+}
+
+/* 文字样式 */
+.text-xl {
+  font-size: var(--text-xl);
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.text-bold {
+  font-weight: var(--font-semibold);
+}
+
+.text-white {
+  color: var(--text-white);
+}
+
+.text-sub {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-danger {
+  color: var(--error-color);
+}
+
+/* 按钮样式 */
+.btn {
+  composes: btn;
+}
+
+.btn-mini {
+  height: 60rpx;
+  padding: 0 var(--space-lg);
+  font-size: var(--text-sm);
+}
+
+.btn-white {
+  background: var(--text-white);
+  color: var(--primary-color);
+  border: none;
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: var(--text-white);
+  border: 1rpx solid var(--text-white);
+}
+
+.bg-white {
+  background: var(--text-white);
+}
+
+/* 管理员标识 */
+.admin-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  padding: 8rpx 16rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-text {
+  color: var(--text-white);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+/* 功能图标 */
+.icon-user,
+.icon-table,
+.icon-order,
+.icon-stats,
+.icon-report,
+.icon-settings,
+.icon-logs,
+.icon-admin,
+.icon-permission {
+  font-size: var(--text-lg);
+  width: 40rpx;
+  text-align: center;
+}
+
+/* 分区标题 */
+.section-title {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  font-weight: var(--font-medium);
+  margin: var(--space-xl) 0 var(--space-md) 0;
+  padding-left: var(--space-sm);
+  border-left: 4rpx solid var(--primary-color);
+}

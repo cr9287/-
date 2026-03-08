@@ -1,0 +1,898 @@
+/* 全局样式 */
+.detail-page {
+  padding: 20rpx;
+  background-color: #f7f8fa;
+  min-height: 100vh;
+}
+
+/* 导航栏样式 */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 0 30rpx;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.back-btn {
+  width: 50rpx;
+  height: 50rpx;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%231677ff"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1677ff;
+  margin-left: 24rpx;
+}
+
+.title-icon {
+  display: none;
+}
+
+/* 信息区域样式 */
+.info-section {
+  padding: 0;
+  margin-bottom: 30rpx;
+}
+
+.info-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 36rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  border: 2rpx solid #e8e8e8;
+}
+
+/* 球台标题和状态 */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.table-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1677ff;
+}
+
+.status-badge {
+  padding: 10rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+}
+
+.status-free {
+  background-color: #52c41a;
+}
+
+.status-using {
+  background-color: #faad14;
+}
+
+.status-reserved {
+  background-color: #fa8c16;
+}
+
+.status-fault {
+  background-color: #f5222d;
+}
+
+/* 信息项样式 */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 32rpx;
+  color: #999;
+  font-weight: 400;
+}
+
+.info-value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* 价格样式 */
+.price {
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.price-symbol {
+  font-size: 36rpx;
+}
+
+.price-number {
+  font-size: 48rpx;
+}
+
+.price-unit {
+  font-size: 28rpx;
+  margin-left: 8rpx;
+}
+
+/* 预约区域样式 */
+.reservation-section {
+  padding: 0;
+  margin-bottom: 20rpx;
+}
+
+.reservation-section.compact {
+  margin-bottom: 8rpx;
+  margin-top: 8rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.reservation-section.compact .section-title {
+  font-size: 24rpx;
+  margin-bottom: 6rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.reservation-card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  border: 1rpx solid #e8e8e8;
+}
+
+.reservation-card.compact {
+  padding: 8rpx 12rpx;
+  border-radius: 6rpx;
+  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.01);
+  border: 1rpx solid #f0f0f0;
+}
+
+.reservation-item {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.reservation-item.compact {
+  font-size: 22rpx;
+  margin-bottom: 4rpx;
+  padding: 2rpx 0;
+  border-bottom: 1rpx solid #f8f8f8;
+  color: #888;
+}
+
+.reservation-item:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+/* 无预约样式 */
+.no-reservation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64rpx 0;
+  color: #999;
+}
+
+.no-reservation-icon {
+  width: 100rpx;
+  height: 100rpx;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d9d9d9"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 24rpx;
+}
+
+.no-reservation-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+}
+
+.no-reservation-guide {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+
+/* 快速选择球台样式 */
+.picker {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  border: 2rpx solid #e8e8e8;
+  font-size: 32rpx;
+  color: #333;
+}
+
+/* 预约时间选择器样式 */
+.picker-group {
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.picker-group:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.picker-label {
+  font-size: 32rpx;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+/* 开始时间和结束时间各占一行布局 */
+.time-picker-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.time-picker-row:last-child {
+  margin-bottom: 0;
+}
+
+/* 预约提示信息样式 */
+.reservation-tip {
+  display: flex;
+  align-items: center;
+  background-color: #fffbe6;
+  border: 1rpx solid #ffe58f;
+  border-radius: 8rpx;
+  padding: 16rpx;
+  margin-bottom: 24rpx;
+  font-size: 28rpx;
+}
+
+.tip-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  color: #fa8c16;
+  line-height: 1.5;
+}
+
+.picker-label-full {
+  font-size: 32rpx;
+  color: #666;
+  font-weight: 400;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+/* 合并显示的日期时间选择器 */
+.picker-combined-full {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8rpx;
+  padding: 4rpx;
+  border: 1rpx solid #d9d9d9;
+  justify-content: space-between;
+}
+
+/* 开始结束时间同一行布局（备用） */
+.picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20rpx;
+}
+
+.time-picker-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-separator {
+  font-size: 32rpx;
+  color: #999;
+  padding: 0 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.picker-combined {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #f0f5ff;
+  border-radius: 8rpx;
+  padding: 4rpx;
+  border: 1rpx solid #d9e4ff;
+}
+
+.picker-combined-display {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  width: 100%;
+  background-color: #f0f5ff;
+  border-radius: 8rpx;
+  padding: 4rpx;
+  border: 1rpx solid #d9e4ff;
+}
+
+.picker-combined-display .picker-value {
+  flex: 1;
+  text-align: center;
+  border-radius: 6rpx;
+  transition: all 0.2s;
+}
+
+.picker-combined-display .picker-value:active {
+  background-color: rgba(22, 119, 255, 0.1);
+}
+
+.picker-value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  padding: 12rpx 24rpx;
+  background-color: transparent;
+  border: none;
+  min-height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 12rpx;
+}
+
+.picker-value.date {
+  color: #333;
+}
+
+.picker-value.time {
+  color: #333;
+  border-left: 1rpx solid #f0f0f0;
+  padding-left: 32rpx;
+}
+
+/* 自定义时间选择器样式 */
+.time-picker-custom {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  border-left: 1rpx solid #f0f0f0;
+  padding-left: 32rpx;
+}
+
+.picker-value.time-segment {
+  color: #333;
+  background: #f5f5f5;
+  padding: 12rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.time-separator-static {
+  color: #999;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 0 8rpx;
+}
+
+.time-text {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: 500;
+  padding: 12rpx 20rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  flex: 1;
+  text-align: center;
+}
+
+.picker-arrow {
+  font-size: 20rpx;
+  color: #999;
+}
+
+/* 时间选择器弹窗样式 */
+.time-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.time-picker-modal .modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* 弹窗包装器 - 在 mask 上面 */
+.time-picker-modal .modal-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.time-picker-modal .modal-content-picker {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  animation: slideUp 0.3s ease-out;
+  overflow: hidden;
+  touch-action: none;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.time-picker-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+  background-color: #fafafa;
+  flex-shrink: 0;  /* 防止被压缩 */
+  touch-action: none;  /* 阻止触摸事件 */
+}
+
+.time-picker-modal .modal-title {
+  font-size: 34rpx;  /* 稍大一点的字体 */
+  font-weight: 600;
+  color: #1a1a1a;  /* 深色文字 */
+}
+
+.time-picker-modal .modal-cancel {
+  font-size: 28rpx;
+  color: #666666;  /* 更深的颜色 */
+  padding: 8rpx 16rpx;
+  background: none;
+  border: none;
+}
+
+/* 弹窗内容 - picker-view 版本 */
+.time-picker-modal .modal-content-picker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  animation: slideUp 0.3s ease-out;
+  overflow: hidden;
+  touch-action: none;  /* 关键：阻止默认触摸行为，让 picker-view 自己处理 */
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+/* picker-view 容器 */
+.time-picker-modal .time-picker-view {
+  width: 100%;
+  height: 400rpx;
+  background-color: #ffffff;
+  touch-action: pan-y;  /* 允许垂直滚动 */
+}
+
+/* picker 包装器 */
+.time-picker-modal .picker-wrapper {
+  width: 100%;
+  height: 400rpx;
+  background-color: #ffffff;
+  overflow: hidden;
+  touch-action: pan-y;  /* 允许垂直滚动 */
+}
+
+/* picker 选项样式 */
+.time-picker-modal .picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+/* 确定按钮 */
+.time-picker-modal .btn-confirm {
+  display: block;
+  width: 90%;
+  margin: 32rpx auto 48rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background-color: #07c160;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 12rpx;
+  transition: opacity 0.2s;
+  box-shadow: 0 2rpx 8rpx rgba(7, 193, 96, 0.3);
+}
+
+.time-picker-modal .btn-confirm:active {
+  opacity: 0.8;
+}
+
+/* 多列 picker 容器（保留备用） */
+.time-picker-modal .multi-picker-container {
+  margin: 30rpx 20rpx;
+  padding: 32rpx;
+  background-color: #f8f8f8;
+  border-radius: 12rpx;
+  border: 2rpx solid #e8e8e8;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* picker 包装器 */
+.time-picker-modal .picker-wrapper {
+  position: relative;
+  width: calc(100% - 40rpx);
+  margin: 0 20rpx;
+}
+
+/* 透明覆盖层 */
+.time-picker-modal .picker-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+/* 滚动选择器（保留，以防需要切换回 picker-view） */
+.time-picker-modal .time-picker-view {
+  height: 480rpx;
+  width: 100%;
+  background-color: #fff;
+  overflow: visible;
+}
+
+.time-picker-modal .picker-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 88rpx;
+  font-size: 34rpx;
+  color: #333333;  /* 深色文字，更清晰 */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+/* 选中的时间项 */
+.time-picker-modal .picker-item[selected] {
+  color: #07c160;  /* 绿色高亮 */
+  font-weight: 600;
+}
+
+.time-picker-modal .modal-footer {
+  padding: 24rpx 32rpx 32rpx;
+  border-top: 1rpx solid #e8e8e8;
+  background-color: #fafafa;
+  flex-shrink: 0;  /* 防止被压缩 */
+  touch-action: none;  /* 阻止触摸事件 */
+}
+
+.time-picker-modal .modal-confirm {
+  display: block;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background-color: #07c160;  /* 鲜亮的绿色 */
+  color: #ffffff;  /* 白色文字 */
+  font-size: 32rpx;  /* 稍大的字体 */
+  font-weight: 600;
+  border-radius: 12rpx;
+  transition: opacity 0.2s;
+  box-shadow: 0 2rpx 8rpx rgba(7, 193, 96, 0.3);  /* 添加阴影 */
+}
+
+.time-picker-modal .modal-confirm:active {
+  opacity: 0.8;
+}
+
+/* 底部操作按钮样式 */
+.action-section {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  height: 112rpx;
+  border-radius: 16rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 24rpx;
+  line-height: 112rpx;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.btn:last-child {
+  margin-bottom: 0;
+}
+
+.btn-primary {
+  background-color: #1677ff;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: #1677ff;
+  border: 2rpx solid #1677ff;
+}
+
+/* 模态框样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  background-color: #fff;
+  border-radius: 24rpx;
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-header {
+  padding: 32rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-content {
+  padding: 40rpx 32rpx;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.modal-row:last-child {
+  margin-bottom: 0;
+}
+
+.modal-label {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.modal-value {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+.modal-value.highlight {
+  font-weight: bold;
+  color: #1677ff;
+  font-size: 32rpx;
+}
+
+.modal-value.price {
+  color: #ff4d4f;
+  font-weight: bold;
+  font-size: 34rpx;
+}
+
+.modal-value.warning {
+  color: #ff4d4f;
+}
+
+.modal-value.price-large {
+  color: #ff4d4f;
+  font-weight: bold;
+  font-size: 40rpx;
+}
+
+.modal-section-title {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.modal-divider {
+  height: 1rpx;
+  background-color: #f0f0f0;
+  margin: 24rpx 0;
+}
+
+.modal-tip-box {
+  background-color: #fff2f0;
+  border: 1rpx solid #ffccc7;
+  border-radius: 8rpx;
+  padding: 16rpx;
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: #ff4d4f;
+  text-align: center;
+}
+
+.modal-timeout-warning {
+  background-color: #fff7e6;
+  border: 1rpx solid #ffd591;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-top: 24rpx;
+}
+
+.warning-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.warning-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.warning-text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fa8c16;
+}
+
+.warning-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeout-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 8rpx;
+}
+
+.timeout-text:last-child {
+  margin-bottom: 0;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+  background-color: #fff;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-btn::after {
+  border: none;
+}
+
+.modal-btn.cancel {
+  color: #666;
+  border-right: 1rpx solid #f0f0f0;
+}
+
+.modal-btn.confirm {
+  color: #1677ff;
+  font-weight: bold;
+}
+
+.modal-btn[disabled] {
+  color: #d9d9d9;
+  background-color: #f5f5f5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

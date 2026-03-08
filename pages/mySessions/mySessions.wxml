@@ -1,0 +1,79 @@
+<view class="sessions-page">
+
+
+  <!-- 加载状态和骨架屏 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <!-- 骨架屏 -->
+    <view class="skeleton">
+      <view class="skeleton-header">
+        <view class="skeleton-title"></view>
+        <view class="skeleton-subtitle"></view>
+      </view>
+      <view class="skeleton-item">
+        <view class="skeleton-avatar"></view>
+        <view class="skeleton-content">
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+        </view>
+      </view>
+      <view class="skeleton-item">
+        <view class="skeleton-avatar"></view>
+        <view class="skeleton-content">
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+        </view>
+      </view>
+      <view class="skeleton-item">
+        <view class="skeleton-avatar"></view>
+        <view class="skeleton-content">
+          <view class="skeleton-line"></view>
+          <view class="skeleton-line short"></view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 加载动画 -->
+    <view class="loading-state">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!ongoingSessions.length}}" class="empty-state">
+    <view class="empty-icon"></view>
+    <view class="empty-title">您没有进行中的订单</view>
+    <view class="empty-subtitle">快去开台打球吧</view>
+    <button class="empty-btn" bindtap="goHome">去首页开台</button>
+  </view>
+
+  <!-- 进行中订单列表 -->
+  <view wx:else class="flex-column gap-20">
+    <block wx:for="{{ongoingSessions}}" wx:key="id">
+      <view class="session-card" bindtap="resumeTimer" data-id="{{item.id}}">
+        <!-- 顶部信息：球台和状态 -->
+        <view class="card-header">
+          <text class="session-table">{{item.tableName || '球台' + item.tableId}}</text>
+          <text class="session-status">进行中</text>
+        </view>
+        
+        <!-- 核心信息：开台时间 -->
+        <view class="card-body">
+          <view class="time-section">
+            <text class="time-label">开台时间</text>
+            <text class="session-time">{{item.startTime || '刚刚'}}</text>
+          </view>
+        </view>
+        
+        <!-- 底部操作按钮 -->
+        <view class="card-footer">
+          <button class="btn-settle" bindtap="settleSession" data-id="{{item.id}}">结算订单</button>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view wx:if="{{ongoingSessions.length}}" class="page-footer">
+    <text class="stat-item">共 {{totalCount}} 台</text>
+  </view>
+</view>

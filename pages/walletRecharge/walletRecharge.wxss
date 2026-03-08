@@ -1,0 +1,579 @@
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  background: #f7f7f7;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  padding: 40rpx;
+  width: 90%;
+  max-width: 700rpx;
+  box-sizing: border-box;
+}
+
+.text-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+  color: #1677ff;
+  text-align: center;
+}
+
+.admin-tip {
+  background: #fff8e6;
+  border: 2rpx solid #ffd666;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tip-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  margin-top: 4rpx;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #d48806;
+  margin-bottom: 8rpx;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #8c6b1f;
+  line-height: 1.4;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.value {
+  display: block;
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 18rpx;
+  background: #f9f9f9;
+  border-radius: 12rpx;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 12rpx;
+  background: #fff;
+  transition: all 0.3s;
+  min-height: 80rpx; /* 确保点击区域足够大 */
+  line-height: 1.4; /* 确保文字垂直居中 */
+}
+
+.input:focus {
+  border-color: #1677ff;
+}
+
+/* 充值金额输入框样式 */
+.recharge-input {
+  font-size: 34rpx;
+  font-weight: 500;
+  border-color: #1677ff;
+  background: #f9f9f9;
+  margin-top: 16rpx;
+}
+
+.input-tip {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+  text-align: center;
+}
+
+/* 快捷金额按钮样式 */
+.quick-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.quick-amount-btn {
+  flex: 0 0 calc(25% - 12rpx);
+  padding: 20rpx 0;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 12rpx;
+  background: #fff;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.quick-amount-btn:active {
+  transform: scale(0.95);
+}
+
+.quick-amount-btn.active {
+  border-color: #1677ff;
+  background: #1677ff;
+  color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(22, 119, 255, 0.3);
+}
+
+.picker {
+  width: 100%;
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  min-height: 80rpx; /* Ensure height matches input */
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 50rpx;
+}
+
+/* 确认充值按钮样式 */
+.btn-recharge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+}
+
+.btn-recharge[disabled] {
+  background: #ccc;
+  box-shadow: none;
+}
+
+/* 辅助操作区样式 */
+.auxiliary-actions {
+  margin-top: 30rpx;
+  text-align: center;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 30rpx;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 16rpx 32rpx;
+  border-radius: 8rpx;
+  background: #f9f9f9;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.action-link:active {
+  background: #f0f0f0;
+}
+
+.link-text {
+  font-size: 26rpx;
+  color: #666;
+  text-decoration: underline;
+}
+
+.btn-primary {
+  flex: 1;
+  background: #1677ff;
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.btn-primary[disabled] {
+  background: #ccc;
+  color: #fff;
+}
+
+/* 余额信息区样式 */
+.balance-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16rpx;
+  padding: 40rpx;
+  margin-bottom: 40rpx;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.balance-label {
+  font-size: 28rpx;
+  opacity: 0.9;
+  margin-bottom: 16rpx;
+}
+
+.balance-amount {
+  font-size: 56rpx;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* 支付方式选择样式优化 */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 28rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 12rpx;
+  background: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.payment-method.active {
+  border-color: #1677ff;
+  background: #f0f7ff;
+  box-shadow: 0 4rpx 12rpx rgba(22, 119, 255, 0.15);
+}
+
+.payment-icon {
+  font-size: 28rpx;
+  margin-right: 16rpx;
+  color: #1677ff;
+  font-weight: bold;
+}
+
+.payment-method text {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.payment-radio {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.payment-radio.checked {
+  border-color: #1677ff;
+  background: #1677ff;
+  position: relative;
+}
+
+.payment-radio.checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16rpx;
+  height: 16rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* 半框支付弹窗样式 */
+.pay-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.pay-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pay-modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.pay-modal-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.pay-modal.show .pay-modal-content {
+  transform: translateY(0);
+}
+
+/* 支付头部样式 */
+.pay-header {
+  padding: 60rpx 40rpx 40rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.pay-header.wechat {
+  background: #1677ff;
+}
+
+.pay-header.alipay {
+  background: #1677ff;
+}
+
+.pay-logo {
+  margin-bottom: 30rpx;
+}
+
+.logo-text {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.pay-amount {
+  margin-bottom: 20rpx;
+}
+
+.amount-symbol {
+  font-size: 48rpx;
+  font-weight: 300;
+}
+
+.amount-number {
+  font-size: 64rpx;
+  font-weight: 600;
+}
+
+.pay-desc {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 支付信息样式 */
+.pay-info {
+  padding: 40rpx;
+}
+
+.pay-info .info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.pay-info .info-item:last-child {
+  border-bottom: none;
+}
+
+.pay-info .info-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.pay-info .info-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 支付密码输入框样式 */
+.pay-info .password-item {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 24rpx;
+}
+
+.pay-info .password-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  background: #fff;
+  box-sizing: border-box;
+  margin-top: 12rpx;
+}
+
+.pay-info .password-input:focus {
+  border-color: #1677ff;
+}
+
+.pay-info .password-error {
+  width: 100%;
+  color: #ff4d4f;
+  font-size: 26rpx;
+  margin-top: 12rpx;
+  text-align: left;
+}
+
+/* 支付按钮样式 */
+.pay-actions {
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.pay-btn {
+  height: 88rpx;
+  border: none;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pay-btn.wechat {
+  background: #1677ff;
+}
+
+.pay-btn.alipay {
+  background: #1677ff;
+}
+
+.pay-btn[loading] {
+  opacity: 0.7;
+}
+
+.cancel-btn {
+  height: 88rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 44rpx;
+  background: #fff;
+  font-size: 32rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 支付密码验证样式 */
+.pay-password-section {
+  margin: 40rpx 0 30rpx;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+.password-input-group {
+  margin-bottom: 20rpx;
+}
+
+.password-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.password-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.password-input:focus {
+  border-color: #0a72ec;
+}
+
+.password-error {
+  color: #e74c3c;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  text-align: center;
+}
+
+.password-success {
+  color: #07c160;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 密码弹窗样式优化 */
+.modal-password {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.password-tip {
+  background: #f0f7ff;
+  border: 2rpx solid #1677ff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #1677ff;
+}
+
+.btn-set-password {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.btn-set-password[disabled] {
+  background: #ccc;
+  box-shadow: none;
+}

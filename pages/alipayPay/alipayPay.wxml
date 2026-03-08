@@ -1,0 +1,97 @@
+<view class="page-container">
+  <!-- 支付宝支付头部 -->
+  <view class="pay-header">
+    <view class="pay-logo">
+      <text class="logo-text">支付宝</text>
+    </view>
+    <view class="pay-amount">
+      <text class="amount-symbol">¥</text>
+      <text class="amount-number">{{payAmount.toFixed(2)}}</text>
+    </view>
+    <view class="pay-desc">充值到用户账户</view>
+  </view>
+
+  <!-- 支付信息 -->
+  <view class="pay-info">
+    <view class="info-item">
+      <text class="info-label">收款方</text>
+      <text class="info-value">无人台球室自助系统</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">充值用户</text>
+      <text class="info-value">{{targetName || targetAccount}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">充值金额</text>
+      <text class="info-value">¥{{payAmount.toFixed(2)}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">支付方式</text>
+      <view class="payment-methods">
+        <view class="payment-method {{paymentMethod === 'WECHAT' ? 'active' : ''}}" bindtap="selectPaymentMethod" data-method="WECHAT">
+          <text>微信支付</text>
+        </view>
+        <view class="payment-method {{paymentMethod === 'ALIPAY' ? 'active' : ''}}" bindtap="selectPaymentMethod" data-method="ALIPAY">
+          <text>支付宝</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 支付状态 -->
+  <block wx:if="{{!paySuccess && !payFailed}}">
+    <!-- 支付中 -->
+    <view class="pay-status">
+      <view class="status-text">等待支付</view>
+      <view class="countdown">支付倒计时 {{countdownText}}</view>
+    </view>
+
+    <!-- 支付按钮 -->
+    <view class="pay-actions">
+      <view class="pay-btn {{loading ? 'loading' : ''}}" bindtap="doPayment">
+        <text wx:if="{{!loading}}">确认支付</text>
+        <text wx:if="{{loading}}">支付中...</text>
+      </view>
+      <view class="cancel-btn" bindtap="goBack">
+        <text>取消支付</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 支付成功 -->
+  <block wx:if="{{paySuccess}}">
+    <view class="pay-status success">
+      <view class="status-text">支付成功</view>
+      <view class="success-desc">充值金额已到账</view>
+    </view>
+  </block>
+
+  <!-- 支付失败 -->
+  <block wx:if="{{payFailed}}">
+    <view class="pay-status failed">
+      <view class="status-icon">
+        <text class="icon-text">❌</text>
+      </view>
+      <view class="status-text">支付失败</view>
+      <view class="failed-desc">支付超时或出现错误</view>
+      <view class="retry-actions">
+        <view class="retry-btn" bindtap="retryPayment">
+          <text>重新支付</text>
+        </view>
+        <view class="cancel-btn" bindtap="goBack">
+          <text>取消支付</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 支付安全提示 -->
+  <view class="security-tips">
+    <view class="tips-title">支付安全提示</view>
+    <view class="tips-content">
+      <text>• 请确认支付金额和收款方信息</text>
+      <text>• 支付过程中请勿关闭页面</text>
+      <text>• 如有疑问请联系客服</text>
+    </view>
+  </view>
+</view>

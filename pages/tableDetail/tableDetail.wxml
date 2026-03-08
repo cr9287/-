@@ -1,0 +1,202 @@
+<view class="detail-page page-wrap">
+  <!-- 球台基础信息卡片 -->
+  <view class="info-section">
+    <view class="info-card">
+      <view class="table-header">
+        <view class="table-name">{{table.name || '选择球台'}}</view>
+        <view class="status-badge {{table.status=='AVAILABLE'?'status-free':(table.status=='IN_USE'?'status-using':(table.status=='RESERVED'?'status-reserved':'status-fault'))}}">{{statusText}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">类型</view>
+        <view class="info-value">{{table.typeText || '普通'}}</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">单价</view>
+        <view class="info-value price">
+          <text class="price-symbol">¥</text>
+          <text class="price-number">{{table.pricePerHour || 30}}</text>
+          <text class="price-unit">/小时</text>
+        </view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">桌号</view>
+        <view class="info-value">{{table.tableNumber > 0 ? table.tableNumber : table.id}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约时间选择 -->
+  <view class="reservation-section">
+    <view class="section-title">预约时间选择</view>
+    <view class="reservation-card">
+      <!-- 预约提示信息 -->
+      <view class="reservation-tip">
+        <text class="tip-text">温馨提示：最多只能提前三天预约，超出时间范围的日期无法选择</text>
+      </view>
+      
+      <!-- 开始时间 -->
+      <view class="time-picker-row">
+        <view class="picker-label-full">开始时间：</view>
+        <view class="picker-combined-full">
+          <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange" start="{{minDate}}" end="{{startMaxDate}}">
+            <view class="picker-value date">
+              <text>{{startDateDisplay}}</text>
+              <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+          <view class="time-separator-static">:</view>
+          <view class="time-text" bindtap="showTimePicker" data-type="start">{{startTime}}</view>
+        </view>
+      </view>
+      
+      <!-- 结束时间 -->
+      <view class="time-picker-row">
+        <view class="picker-label-full">结束时间：</view>
+        <view class="picker-combined-full">
+          <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange" start="{{startDate}}" end="{{endMaxDate}}">
+            <view class="picker-value date">
+              <text>{{endDateDisplay}}</text>
+              <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+          <view class="time-separator-static">:</view>
+          <view class="time-text" bindtap="showTimePicker" data-type="end">{{endTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间选择器弹窗（使用 picker-view） -->
+  <view class="time-picker-modal" wx:if="{{showTimePickerModal}}">
+    <view class="modal-mask" catchtap="hideTimePicker"></view>
+    <view class="modal-wrapper">
+      <view class="modal-content-picker">
+        <view class="modal-header">
+          <view class="modal-title">选择{{timePickerType === 'start' ? '开始' : '结束'}}时间</view>
+          <view class="modal-cancel" catchtap="hideTimePicker">取消</view>
+        </view>
+        
+        <!-- 使用 picker-view 组件 -->
+        <view class="picker-wrapper">
+          <picker-view 
+            class="time-picker-view"
+            indicator-style="height: 80rpx;"
+            value="{{[hourIndex, minuteIndex]}}"
+            bindchange="onPickerChange"
+            bindpickstart="onPickStart"
+            bindpickend="onPickEnd"
+          >
+            <picker-view-column>
+              <view wx:for="{{hours}}" wx:key="*this" class="picker-item">{{item}}时</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{minutes}}" wx:key="*this" class="picker-item">{{item}}分</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
+        
+        <view class="modal-footer">
+          <view class="btn-confirm" catchtap="confirmPicker">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-section">
+    <button wx:if="{{table.canOpenTable}}" class="btn btn-primary" bindtap="openTable">立即开台</button>
+    <button class="btn btn-secondary" bindtap="goReserve">预约球台</button>
+    <button wx:if="{{table.status=='IN_USE' && table.currentSessionId && table.canSettle}}" class="btn btn-secondary" bindtap="goSettle">结算</button>
+  </view>
+
+  <!-- 今日已预约时段 -->
+  <view class="reservation-section compact">
+    <view class="section-title">今日已预约时段</view>
+    <view class="reservation-card compact">
+      <block wx:if="{{reservedRanges.length > 0}}">
+        <block wx:for="{{reservedRanges}}" wx:key="idx">
+          <view class="reservation-item compact">{{item.startHM}} - {{item.endHM}}</view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="no-reservation">
+          <view class="no-reservation-text">暂无预约</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 自定义预约确认模态框 -->
+  <view class="modal-mask" wx:if="{{showReservationModal}}" bindtap="closeReservationModal"></view>
+  <view class="modal-container" wx:if="{{showReservationModal}}">
+    <view class="modal-header">
+      <text class="modal-title">预约确认</text>
+    </view>
+    <view class="modal-content">
+      <!-- 球台信息 -->
+      <view class="modal-section-title">球台信息</view>
+      <view class="modal-row">
+        <text class="modal-label">球台名称</text>
+        <text class="modal-value highlight">{{reservationConfirmData.tableName}}</text>
+      </view>
+      <view class="modal-row">
+        <text class="modal-label">球桌类型</text>
+        <text class="modal-value">{{reservationConfirmData.tableType}}</text>
+      </view>
+      <view class="modal-row">
+        <text class="modal-label">单价</text>
+        <text class="modal-value price">¥{{reservationConfirmData.pricePerHour}}/小时</text>
+      </view>
+      
+      <view class="modal-divider"></view>
+      
+      <!-- 预约时间 -->
+      <view class="modal-section-title">预约时间</view>
+      <view class="modal-row">
+        <text class="modal-label">开始时间</text>
+        <text class="modal-value">{{reservationConfirmData.startDisplay}}</text>
+      </view>
+      <view class="modal-row">
+        <text class="modal-label">结束时间</text>
+        <text class="modal-value">{{reservationConfirmData.endDisplay}}</text>
+      </view>
+      <view class="modal-row">
+        <text class="modal-label">预约时长</text>
+        <text class="modal-value">{{reservationConfirmData.durationHours}}小时</text>
+      </view>
+      
+      <view class="modal-divider"></view>
+      
+      <!-- 费用信息 -->
+      <view class="modal-section-title">费用信息</view>
+      <view class="modal-row">
+        <text class="modal-label">保证金</text>
+        <text class="modal-value price-large">¥{{reservationConfirmData.deposit}}</text>
+      </view>
+      <view class="modal-row">
+        <text class="modal-label">当前余额</text>
+        <text class="modal-value {{reservationConfirmData.isBalanceEnough ? '' : 'warning'}}">¥{{reservationConfirmData.balance}}</text>
+      </view>
+      <view class="modal-tip-box" wx:if="{{!reservationConfirmData.isBalanceEnough}}">
+        <text>⚠️ 余额不足，请先充值</text>
+      </view>
+      
+      <!-- 超时提醒 -->
+      <view class="modal-timeout-warning">
+        <view class="warning-title">
+          <text class="warning-icon">⚠️</text>
+          <text class="warning-text">重要提醒</text>
+        </view>
+        <view class="warning-content">
+          <text class="timeout-text">1. 请在预约开始后 20 分钟内开台，否则预约将自动过期</text>
+          <text class="timeout-text">2. 预约过期后保证金不予退还</text>
+          <text class="timeout-text">3. 如需取消预约，请至少提前 1 小时操作</text>
+        </view>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="modal-btn cancel" bindtap="closeReservationModal">取消</button>
+      <button class="modal-btn confirm" bindtap="confirmReservation" disabled="{{!reservationConfirmData.isBalanceEnough}}">确认支付保证金</button>
+    </view>
+  </view>
+</view>

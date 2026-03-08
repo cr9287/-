@@ -1,0 +1,15 @@
+/* 引用 userLogin 的样式以保持统一 */
+@import "../userLogin/userLogin.wxss";
+
+/* 注册页特有微调 */
+.form-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.error-tip {
+  font-size: 24rpx;
+  color: #ff4d4f;
+  margin-top: 8rpx;
+}

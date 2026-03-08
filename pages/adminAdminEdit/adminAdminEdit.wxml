@@ -1,0 +1,105 @@
+<!-- 管理员编辑页面 - 添加或编辑管理员账号 -->
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">{{id ? '编辑管理员' : '添加管理员'}}</view>
+    
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    
+    <!-- 表单内容 -->
+    <block wx:else>
+      <!-- 添加方式选择 -->
+      <view class="form-item" wx:if="{{!id}}">
+        <view class="label">添加方式</view>
+        <radio-group bindchange="onIsFromUser" class="radio-group">
+          <label class="radio-item">
+            <radio value="false" checked="{{!isFromUser}}" /> 直接创建
+          </label>
+          <label class="radio-item">
+            <radio value="true" checked="{{isFromUser}}" /> 从普通用户添加
+          </label>
+        </radio-group>
+      </view>
+      
+      <!-- 直接创建表单 -->
+      <block wx:if="{{!isFromUser || id}}">
+        <!-- 账号 -->
+        <view class="form-item">
+          <view class="label">账号</view>
+          <input 
+            class="input" 
+            value="{{account}}" 
+            bindinput="onAccount" 
+            placeholder="请输入管理员账号" 
+            disabled="{{id}}"
+          />
+          <view class="form-tip">注意：账号创建后不可修改</view>
+        </view>
+        
+        <!-- 名称 -->
+        <view class="form-item">
+          <view class="label">名称</view>
+          <input 
+            class="input" 
+            value="{{name}}" 
+            bindinput="onName" 
+            placeholder="请输入管理员名称" 
+          />
+        </view>
+        
+        <!-- 密码 -->
+        <view class="form-item">
+          <view class="label">密码</view>
+          <view class="input-wrapper">
+            <input 
+              class="input" 
+              value="{{password}}" 
+              bindinput="onPassword" 
+              placeholder="请输入管理员密码" 
+              password="{{!passwordVisible}}"
+            />
+            <view class="password-toggle" bindtap="togglePasswordVisibility">{{passwordVisible ? '隐藏' : '显示'}}</view>
+          </view>
+        </view>
+        
+        <!-- 确认密码 -->
+        <view class="form-item">
+          <view class="label">确认密码</view>
+          <view class="input-wrapper">
+            <input 
+              class="input" 
+              value="{{confirmPassword}}" 
+              bindinput="onConfirmPassword" 
+              placeholder="请再次输入密码" 
+              password="{{!confirmPasswordVisible}}"
+            />
+            <view class="password-toggle" bindtap="toggleConfirmPasswordVisibility">{{confirmPasswordVisible ? '隐藏' : '显示'}}</view>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 从普通用户添加表单 -->
+      <block wx:if="{{isFromUser}}">
+        <!-- 用户选择 -->
+        <view class="form-item">
+          <view class="label">选择用户</view>
+          <picker bindchange="onUserChange" value="{{selectedUserId}}" range="{{users}}" range-key="account">
+            <view class="picker">
+              {{users.length > 0 ? (selectedUserId ? users[selectedUserId].account : '请选择用户') : '加载用户列表中...'}}
+            </view>
+          </picker>
+        </view>
+        
+        <view class="tip">将使用用户原有的密码作为管理员密码</view>
+      </block>
+      
+      <!-- 操作按钮 -->
+      <view class="actions">
+        <button class="btn-primary" bindtap="save">保存</button>
+        <button class="btn-secondary" bindtap="cancel">取消</button>
+      </view>
+    </block>
+  </view>
+</view>

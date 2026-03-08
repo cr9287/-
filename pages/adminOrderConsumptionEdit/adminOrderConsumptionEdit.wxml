@@ -1,0 +1,74 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">编辑已完成订单</view>
+    
+    <view class="form-item">
+      <view class="label">订单状态</view>
+      <picker mode="selector" range="{{statusLabels}}" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="picker">{{statusIndex >= 0 ? statusLabels[statusIndex] : '请选择状态'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">球台</view>
+      <picker mode="selector" range="{{tables}}" range-key="name" value="{{tableIndex}}" bindchange="onTableChange">
+        <view class="picker">{{tableIndex >= 0 ? tables[tableIndex].name : '请选择球桌'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">用户账号</view>
+      <input class="input" value="{{userId}}" bindinput="onUser" placeholder="用户ID/账号" />
+    </view>
+    
+    <view class="form-item">
+      <view class="label">开始日期</view>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDate">
+        <view class="picker">{{startDate || '请选择日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">开始时间</view>
+      <picker mode="time" value="{{startHM}}" bindchange="onStartHM">
+        <view class="picker">{{startHM || '请选择时间'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="label">结束日期</view>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDate">
+        <view class="picker">{{endDate || '请选择日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">结束时间</view>
+      <picker mode="time" value="{{endHM}}" bindchange="onEndHM">
+        <view class="picker">{{endHM || '请选择时间'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">时长（分钟）</view>
+      <input class="input" type="number" placeholder="请输入时长" value="{{minutes}}" bindinput="onMinutes" />
+    </view>
+    
+    <view class="form-item">
+      <view class="label">金额（元）</view>
+      <input class="input" type="number" placeholder="请输入金额" value="{{amount}}" bindinput="onAmount" />
+    </view>
+    
+    <view class="form-item">
+      <view class="switch-group">
+        <switch checked="{{linkWallet}}" bindchange="onLinkWallet" color="#1677ff" />
+        <text>联动调整用户钱包余额（按差额扣/退）</text>
+      </view>
+    </view>
+    
+    <view class="actions">
+      <button class="btn-primary" bindtap="save">保存</button>
+      <button class="btn-secondary" bindtap="cancel">取消</button>
+    </view>
+  </view>
+</view>

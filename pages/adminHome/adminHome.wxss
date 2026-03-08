@@ -1,0 +1,242 @@
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 180rpx;
+  box-sizing: content-box;
+}
+
+/* 顶部导航提示样式 */
+.top-nav-tip {
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+  color: white;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 24rpx 40rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(22, 119, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tables-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  padding: 24rpx; 
+  width: 100%; 
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.table-card {
+  width: 48%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+
+.table-card:active {
+  transform: scale(0.98);
+  background-color: #f9f9f9;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.table-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 32rpx;
+  line-height: 1.4;
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+/* 状态标签 */
+.status-badge {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge.AVAILABLE { background: #f6ffed; color: #52c41a; border: 1rpx solid #b7eb8f; }
+.status-badge.IN_USE { background: #e6f4ff; color: #1677ff; border: 1rpx solid #91caff; }
+.status-badge.RESERVED { background: #fff7e6; color: #faad14; border: 1rpx solid #ffe58f; }
+.status-badge.FAULT { background: #fff1f0; color: #f5222d; border: 1rpx solid #ffa39e; }
+
+.table-body {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.price {
+  font-size: 28rpx;
+  color: #1677ff;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.table-number {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.usage-tip {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 空状态样式 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #999;
+}
+
+.empty-state .empty-text {
+  font-size: 28rpx;
+}
+
+/* 底部操作区域 */
+.bottom-actions {
+  background: white;
+  border-radius: 20rpx;
+  padding: 10rpx;
+  margin: 0rpx 0rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.action-section {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  border: none;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.logout-btn {
+  background: #f5f5f5;
+  color: #1677ff;
+}
+
+.logout-btn:active {
+  background: #e8e8e8;
+}
+
+.edit-btn {
+  background: #f5f5f5;
+  color: #666666;
+}
+
+.edit-btn:active {
+  background: #e8e8e8;
+}
+
+.delete-btn {
+  background: #ff4d4f;
+  color: #ffffff;
+}
+
+.delete-btn:active {
+  background: #d9363e;
+}
+
+.demote-btn {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+.demote-btn:active {
+  background: #fff1d9;
+}
+
+.btn-text {
+  font-weight: bold;
+}
+
+/* 加载状态 */
+.loading-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.loading-text {
+  font-size: 28rpx;
+}
+
+/* 错误状态 */
+.error-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #ff4d4f;
+}
+
+.error-text {
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.retry-btn {
+  background: #1677ff;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  padding: 16rpx 32rpx;
+  font-size: 26rpx;
+}

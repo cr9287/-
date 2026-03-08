@@ -1,0 +1,24 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">新建球桌</view>
+    <view class="form-item">
+      <view class="label">名称</view>
+      <input class="input" placeholder="请输入球桌名称" value="{{name}}" bindinput="onName" />
+    </view>
+    <view class="form-item">
+      <view class="label">价格（元/小时）</view>
+      <input class="input" type="number" placeholder="请输入每小时价格" value="{{price}}" bindinput="onPrice" />
+    </view>
+    <view class="form-item">
+      <view class="label">类型</view>
+      <picker bindchange="onTypeChange" value="{{typeIndex}}" range="{{types}}">
+        <view class="picker input">
+          当前选择：{{types[typeIndex]}}
+        </view>
+      </picker>
+    </view>
+    <view class="actions">
+      <button class="btn-primary" bindtap="create">创建</button>
+    </view>
+  </view>
+</view>

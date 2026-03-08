@@ -1,0 +1,41 @@
+<view class="page-container">
+  <!-- 页面头部 -->
+  <view class="page-header-row">
+    <view class="header-left">
+      <text class="page-title">管理员管理</text>
+      <text class="page-subtitle">管理员总数：{{admins.length}}</text>
+    </view>
+    <view class="header-right">
+      <button class="add-btn" bindtap="createAdmin" size="mini">新建</button>
+    </view>
+  </view>
+
+  <scroll-view class="admin-list" scroll-y="true">
+    <block wx:for="{{admins}}" wx:key="id">
+      <view class="admin-card">
+        <view class="card-left">
+          <view class="info-row">
+            <text class="admin-name">{{item.name || item.account}}</text>
+            <text class="divider">|</text>
+            <text class="info-tag">{{item.account === 'admin' ? '超级管理员' : (item.isSuperAdmin ? '超级管理员' : '普通管理员')}}</text>
+          </view>
+        </view>
+        
+        <!-- 操作按钮 -->
+        <view class="card-right">
+          <view class="action-buttons">
+            <button class="mini-btn btn-edit" plain bindtap="goEdit" data-id="{{item.id}}" size="mini">编辑</button>
+            <button wx:if="{{item.account !== 'admin' && !item.isSuperAdmin}}" class="mini-btn btn-demote" plain bindtap="demoteAdmin" data-id="{{item.id}}" data-name="{{item.name || item.account}}" size="mini">降级</button>
+            <button wx:if="{{item.account !== 'admin' && !item.isSuperAdmin}}" class="mini-btn btn-delete" plain bindtap="deleteAdmin" data-id="{{item.id}}" data-name="{{item.name || item.account}}" size="mini">删除</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <block wx:if="{{admins.length === 0}}">
+      <view class="empty-state">
+        <text class="empty-text">暂无管理员，点击右上角新建</text>
+      </view>
+    </block>
+  </scroll-view>
+</view>

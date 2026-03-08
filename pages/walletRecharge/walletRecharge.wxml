@@ -1,0 +1,170 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">钱包充值</view>
+    
+    <!-- 当前余额信息区 -->
+    <view class="balance-section">
+      <view class="balance-label">当前余额</view>
+      <view class="balance-amount">¥{{walletBalanceText}}</view>
+    </view>
+    
+    <!-- 支付方式选择区 -->
+    <view class="form-item">
+      <view class="label">支付方式</view>
+      <view class="payment-methods">
+        <view class="payment-method {{paymentMethod === 'WECHAT' ? 'active' : ''}}" bindtap="selectPaymentMethod" data-method="WECHAT">
+          <view class="payment-icon">微信</view>
+          <text>微信支付</text>
+          <view class="payment-radio {{paymentMethod === 'WECHAT' ? 'checked' : ''}}"></view>
+        </view>
+        <view class="payment-method {{paymentMethod === 'ALIPAY' ? 'active' : ''}}" bindtap="selectPaymentMethod" data-method="ALIPAY">
+          <view class="payment-icon">支付宝</view>
+          <text>支付宝</text>
+          <view class="payment-radio {{paymentMethod === 'ALIPAY' ? 'checked' : ''}}"></view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 充值金额输入区 -->
+    <view class="form-item">
+      <view class="label">充值金额</view>
+      <!-- 快捷金额按钮 -->
+      <view class="quick-amounts">
+        <view class="quick-amount-btn {{rechargeAmount === item.toString() ? 'active' : ''}}" 
+              wx:for="{{quickAmounts}}" 
+              wx:key="*this" 
+              bindtap="selectQuickAmount" 
+              data-amount="{{item}}">
+          ¥{{item}}
+        </view>
+      </view>
+      <!-- 自定义金额输入 -->
+      <input id="rechargeInput" class="input recharge-input" type="digit" placeholder="请输入充值金额" value="{{rechargeAmount}}" bindinput="onRechargeInput" bindfocus="onInputFocus" bindblur="onInputBlur" />
+      <view class="input-tip">单次充值金额范围：¥0.01 - ¥10000.00</view>
+    </view>
+    
+    <!-- 确认充值按钮 -->
+    <view class="actions">
+      <button class="btn-primary btn-recharge" bindtap="doRecharge" loading="{{loading}}" disabled="{{loading || !rechargeAmount}}">确认充值</button>
+    </view>
+    
+    <!-- 辅助操作区 -->
+    <view class="auxiliary-actions">
+      <view class="action-link" bindtap="goToSetPassword">
+        <text class="link-text">设置支付密码</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 微信支付半框弹窗 -->
+  <view class="pay-modal {{showWechatPay ? 'show' : 'hidden'}}" hidden="{{!showWechatPay}}">
+    <view class="pay-modal-mask" bindtap="closePayModal"></view>
+    <view class="pay-modal-content">
+      <!-- 微信支付头部 -->
+      <view class="pay-header wechat">
+        <view class="pay-logo">
+          <text class="logo-text">微信支付</text>
+        </view>
+        <view class="pay-amount">
+          <text class="amount-symbol">¥</text>
+          <text class="amount-number">{{rechargeAmount}}</text>
+        </view>
+        <view class="pay-desc">充值到用户账户</view>
+      </view>
+
+      <!-- 支付信息 -->
+      <view class="pay-info">
+        <view class="info-item">
+          <text class="info-label">收款方</text>
+          <text class="info-value">无人台球室自助系统</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">充值用户</text>
+          <text class="info-value">{{targetAccount}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">充值金额</text>
+          <text class="info-value">¥{{rechargeAmount}}</text>
+        </view>
+        <!-- 支付密码输入框 -->
+        <view class="info-item password-item">
+          <text class="info-label">支付密码</text>
+          <input 
+            class="password-input" 
+            type="password" 
+            placeholder="请输入 6 位支付密码" 
+            maxlength="6" 
+            value="{{paymentPassword}}" 
+            bindinput="onPaymentPasswordInput"
+          />
+        </view>
+        <!-- 错误提示 -->
+        <view class="password-error" wx:if="{{passwordError}}">
+          <text class="error-text">{{passwordError}}</text>
+        </view>
+      </view>
+
+      <!-- 支付按钮 -->
+      <view class="pay-actions">
+        <button class="pay-btn wechat" bindtap="confirmWechatPay" loading="{{payLoading}}">确认支付</button>
+        <button class="cancel-btn" bindtap="closePayModal">取消支付</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 支付宝半框弹窗 -->
+  <view class="pay-modal {{showAlipayPay ? 'show' : 'hidden'}}" hidden="{{!showAlipayPay}}">
+    <view class="pay-modal-mask" bindtap="closePayModal"></view>
+    <view class="pay-modal-content">
+      <!-- 支付宝头部 -->
+      <view class="pay-header alipay">
+        <view class="pay-logo">
+          <text class="logo-text">支付宝</text>
+        </view>
+        <view class="pay-amount">
+          <text class="amount-symbol">¥</text>
+          <text class="amount-number">{{rechargeAmount}}</text>
+        </view>
+        <view class="pay-desc">充值到用户账户</view>
+      </view>
+
+      <!-- 支付信息 -->
+      <view class="pay-info">
+        <view class="info-item">
+          <text class="info-label">收款方</text>
+          <text class="info-value">无人台球室自助系统</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">充值用户</text>
+          <text class="info-value">{{targetAccount}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">充值金额</text>
+          <text class="info-value">¥{{rechargeAmount}}</text>
+        </view>
+        <!-- 支付密码输入框 -->
+        <view class="info-item password-item">
+          <text class="info-label">支付密码</text>
+          <input 
+            class="password-input" 
+            type="password" 
+            placeholder="请输入 6 位支付密码" 
+            maxlength="6" 
+            value="{{paymentPassword}}" 
+            bindinput="onPaymentPasswordInput"
+          />
+        </view>
+        <!-- 错误提示 -->
+        <view class="password-error" wx:if="{{passwordError}}">
+          <text class="error-text">{{passwordError}}</text>
+        </view>
+      </view>
+
+      <!-- 支付按钮 -->
+      <view class="pay-actions">
+        <button class="pay-btn alipay" bindtap="confirmAlipayPay" loading="{{payLoading}}">确认支付</button>
+        <button class="cancel-btn" bindtap="closePayModal">取消支付</button>
+      </view>
+    </view>
+  </view>
+</view>

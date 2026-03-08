@@ -1,0 +1,272 @@
+/* 引入全局样式 */
+@import "../../styles/global.wxss";
+
+.consumptions-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 查询和排序栏 */
+.filter-bar {
+  background: white;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 64rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: #fafafa;
+}
+
+.search-input:focus {
+  border-color: #1677ff;
+  background: white;
+}
+
+.time-filter {
+  padding: 0 24rpx;
+  height: 64rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  cursor: pointer;
+  border: 1rpx solid transparent;
+}
+
+.time-filter:active {
+  background: #e8e8e8;
+}
+
+.filter-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.filter-icon {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 排序菜单 */
+.sort-menu {
+  background: var(--card-bg);
+  border-bottom: 1rpx solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.sort-item {
+  padding: var(--space-xl) var(--space-lg);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  border-bottom: 1rpx solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sort-item:active {
+  background: var(--bg-color);
+}
+
+.sort-item:last-child {
+  border-bottom: none;
+}
+
+/* 消费记录列表 */
+.consumptions-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  background: var(--bg-color);
+}
+
+/* 消费卡片 */
+.cons-card {
+  composes: card;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid #f0f0f0;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.cons-card:active {
+  transform: scale(0.98);
+  background: #f8f9fa;
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.cons-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.cons-type {
+  font-size: 24rpx;
+  color: #666;
+  background: #f5f5f5;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+/* 卡片主体 */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.amount-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amount-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.cons-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+  font-family: 'DIN Alternate', Arial, sans-serif;
+}
+
+.cons-amount.consumption {
+  color: #ff4d4f;
+}
+
+.cons-amount.recharge {
+  color: #52c41a;
+}
+
+/* 附加信息 */
+.additional-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.table-text, .duration-text, .payment-text {
+  font-size: 22rpx;
+  color: #999;
+  background: #f8f9fa;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.payment-text {
+  background: #e6f7ff;
+  color: #1890ff;
+  border: 1rpx solid #91d5ff;
+}
+
+/* 空状态页面 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  text-align: center;
+  background: #f5f5f5;
+  height: 100vh;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  background: linear-gradient(135deg, #fa8c16 0%, #d46b08 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.empty-icon::before {
+  content: "";
+  font-size: 48rpx;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.empty-subtitle {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 32rpx;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.empty-btn {
+  padding: 20rpx 32rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+}
+
+.recharge-btn {
+  background: #1677ff;
+  color: white;
+}
+
+.recharge-btn:active {
+  background: #0958d9;
+}
+
+.home-btn {
+  background: white;
+  color: #666;
+  border: 1rpx solid #e0e0e0;
+}
+
+.home-btn:active {
+  background: #f5f5f5;
+}
+
+/* 页面底部统计 */
+.page-footer {
+  background: var(--card-bg);
+  padding: var(--space-lg);
+  border-top: 1rpx solid var(--border-color);
+  text-align: center;
+}
+
+.stat-item {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}

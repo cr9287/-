@@ -1,0 +1,74 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="text-title">编辑预约订单</view>
+    
+    <view class="form-item">
+      <view class="label">订单状态</view>
+      <picker mode="selector" range="{{statusLabels}}" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="picker">{{statusIndex >= 0 ? statusLabels[statusIndex] : '请选择状态'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="label">选择球桌</view>
+      <picker mode="selector" range="{{tables}}" range-key="name" value="{{tableIndex}}" bindchange="onTableChange">
+        <view class="picker">{{tableIndex >= 0 ? tables[tableIndex].name : '请选择球桌'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">预约用户（可选列表）</view>
+      <picker mode="selector" range="{{users}}" range-key="displayText" value="{{userIndex}}" bindchange="onUserChange">
+        <view class="picker">{{userIndex >= 0 ? users[userIndex].displayText : '选择用户'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="label">预约账号（手动输入）</view>
+      <input class="input" placeholder="请输入用户账号" value="{{userId}}" bindinput="onUser" />
+    </view>
+    
+    <view class="form-item">
+      <view class="label">日期</view>
+      <picker mode="date" value="{{date}}" bindchange="onDate">
+        <view class="picker">{{date || '请选择日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">开始时间</view>
+      <picker mode="time" value="{{startHM}}" bindchange="onStartHM">
+        <view class="picker">{{startHM || '请选择开始时间'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">结束日期</view>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDate">
+        <view class="picker">{{endDate || '请选择结束日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">结束时间</view>
+      <picker mode="time" value="{{endHM}}" bindchange="onEndHM">
+        <view class="picker">{{endHM || '请选择结束时间'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="label">预约金额</view>
+      <input class="input" type="digit" placeholder="请输入预约金额" value="{{totalAmount}}" bindinput="onTotalAmount" />
+    </view>
+    
+    <view class="form-item">
+      <view class="label">押金金额</view>
+      <input class="input" type="digit" placeholder="请输入押金金额" value="{{depositAmount}}" bindinput="onDepositAmount" />
+    </view>
+
+    <view class="actions">
+      <button class="btn-primary" bindtap="save">保存</button>
+      <button class="btn-secondary" bindtap="cancel">取消</button>
+    </view>
+  </view>
+</view>

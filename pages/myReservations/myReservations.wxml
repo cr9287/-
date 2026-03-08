@@ -1,0 +1,56 @@
+<view class="reservations-page">
+
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!reservations.length}}" class="empty-state">
+    <view class="empty-icon"></view>
+    <view class="empty-title">您还没有任何预约记录</view>
+    <view class="empty-subtitle">快去预约球台吧</view>
+    <button class="empty-btn" bindtap="goHome">去首页预约</button>
+  </view>
+
+  <!-- 预约记录列表 -->
+  <view wx:else class="reservations-list">
+    <block wx:for="{{reservations}}" wx:key="id">
+      <view class="reservation-card">
+        <!-- 顶部信息：球台和状态 -->
+        <view class="card-header">
+          <text class="reservation-table">{{item.tableName || '球台' + item.tableId}}</text>
+          <text class="reservation-status {{item.status.toLowerCase()}}">{{item.statusText || item.status}}</text>
+        </view>
+        
+        <!-- 核心信息：日期和时间段 -->
+        <view class="card-body">
+          <view class="time-section">
+            <text class="reservation-date">{{item.startDate}}</text>
+            <text class="reservation-time">{{item.startTime}} - {{item.endTime}}</text>
+          </view>
+          
+          <!-- 状态提示 -->
+          <view class="status-info">
+            <!-- 超时提醒 -->
+            <text class="warning-text" wx:if="{{item.status === 'PENDING'}}">请在预约开始后20分钟内开台</text>
+            
+            <!-- 过期提示 -->
+            <text class="expired-text" wx:if="{{item.status === 'EXPIRED'}}">❌ 预约已过期（超时未开台）</text>
+          </view>
+        </view>
+        
+        <!-- 底部操作按钮 -->
+        <view class="card-footer" wx:if="{{item.status === 'PENDING'}}">
+          <button class="btn-verify" bindtap="goVerify" data-id="{{item.id}}">核销</button>
+          <button class="btn-cancel" bindtap="cancelReserve" data-id="{{item.id}}">取消</button>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view wx:if="{{reservations.length}}" class="page-footer">
+    <text class="stat-item">共 {{totalCount}} 条记录</text>
+  </view>
+</view>

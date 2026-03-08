@@ -1,0 +1,38 @@
+<view class="timer-page page-wrap">
+  
+  <!-- 核心计时信息卡片 -->
+  <view class="info-card">
+    <!-- 顶部标题 -->
+    <view class="card-header">
+      <text class="header-title">球台 {{session.tableNumber || session.tableName}}</text>
+      <text class="header-separator"> - </text>
+      <view class="status-badge">计时中</view>
+    </view>
+    
+    <view class="divider"></view>
+    
+    <!-- 已用时 -->
+    <view class="data-section">
+      <text class="label">已用时</text>
+      <text class="value time-value">{{elapsedText}}</text>
+    </view>
+    
+    <!-- 当前费用 -->
+    <view class="data-section">
+      <text class="label">当前费用</text>
+      <text class="value cost-value">¥{{amountText}}</text>
+    </view>
+    
+    <view class="divider"></view>
+    
+    <!-- 计费规则 -->
+    <view class="rule-section">
+      <text class="rule-text">计费规则：¥{{session.pricePerHour || 30}} / 小时，不满 10 分钟按 10 分钟计费</text>
+    </view>
+  </view>
+  
+  <!-- 底部操作按钮 -->
+  <view class="action-section">
+    <button class="btn-end" bindtap="confirmSettle">结束计时</button>
+  </view>
+</view>

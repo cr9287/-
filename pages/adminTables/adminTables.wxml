@@ -1,0 +1,89 @@
+<scroll-view class="admin-tables" scroll-y>
+  <view class="page-header-row">
+    <text class="page-title">台球桌管理</text>
+    <text class="page-subtitle">球桌总数：{{tables.length}}</text>
+  </view>
+  
+  <!-- 批量操作栏 -->
+  <view class="batch-operations" wx:if="{{batchMode}}">
+    <view class="batch-info">
+      <text class="batch-text">已选择 {{selectedCount}} 项</text>
+    </view>
+    <view class="batch-actions">
+      <view class="batch-btn batch-select-all" bindtap="toggleSelectAll">
+        <text>{{isAllSelected ? '取消全选' : '全选'}}</text>
+      </view>
+      <view class="batch-btn batch-delete" bindtap="batchDelete">
+        <text>批量删除</text>
+      </view>
+      <view class="batch-btn batch-cancel" bindtap="exitBatchMode">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 进入批量模式按钮 -->
+  <view class="enter-batch-mode" wx:if="{{!batchMode}}">
+    <view class="batch-btn" bindtap="enterBatchMode">
+      <text>批量操作</text>
+    </view>
+  </view>
+  
+  <view class="table-list">
+    <block wx:for="{{tables}}" wx:key="id">
+      <view class="table-card {{batchMode ? 'batch-mode' : ''}}">
+        <!-- 选择框 -->
+        <view class="checkbox-container" wx:if="{{batchMode}}">
+          <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelectTable" data-index="{{index}}">
+            <text class="checkmark" wx:if="{{item.selected}}">✓</text>
+          </view>
+        </view>
+        
+        <!-- 左侧：核心信息 -->
+        <view class="card-left">
+          <view class="info-row">
+            <text class="table-name">{{item.name}} (#{{item.tableNumber}})</text>
+            <text class="spacer"></text> <!-- 竖线改为空格 -->
+            <text class="info-tag">{{tableTypeMap[item.type] || item.type || '普通'}}</text>
+            <text class="divider">|</text>
+            <text class="info-tag">{{item.pricePerHour || item.price || 30}}/h</text>
+          </view>
+        </view>
+        
+        <!-- 右侧：状态 + 操作 -->
+        <view class="card-right">
+          <picker mode="selector" range="{{statusOptions}}" value="{{statusValues.indexOf(item.status)}}" bindchange="onStatusChange" data-id="{{item.id}}" class="status-picker">
+            <view class="status-inline">
+              <view class="status-dot status-bg-{{item.status.toLowerCase()}}"></view>
+              <text class="status-text-inline">{{tableStatusMap[item.status]}}</text>
+            </view>
+          </picker>
+          
+          <view class="action-buttons" wx:if="{{!batchMode}}">
+            <view bindtap="editTable" data-id="{{item.id}}" class="mini-btn btn-edit">
+              <text>编辑</text>
+            </view>
+            <view bindtap="deleteTable" data-id="{{item.id}}" class="mini-btn btn-delete">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 空状态 -->
+  <view wx:if="{{tables.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无台球桌数据</text>
+    <text class="empty-text">点击下方按钮添加台球桌</text>
+  </view>
+  
+  <!-- 提示信息 -->
+  <text wx:if="{{tables.length > 0}}" class="hint">提示：状态为“已预约”不可直接改为其它状态；使用中或已预约的球桌不可删除。</text>
+</scroll-view>
+
+<!-- 添加按钮 -->
+<view class="add-btn-pill" bindtap="addTable">
+  <text class="add-icon">+</text>
+  <text class="add-text">新增球桌</text>
+</view>

@@ -1,0 +1,39 @@
+<!-- 首页：顶部导航+球台卡片 + 底部导航 -->
+<view class="page-container">
+  <scroll-view class="scrollarea" scroll-y refresher-enabled="true" refresher-triggered="{{refreshing}}" bindrefresherrefresh="onRefresh">
+    <!-- 顶部导航提示 -->
+    <view class="top-nav-tip">
+      点击你要使用/预约的球桌
+    </view>
+    <!-- 球台列表 -->
+    <view class="tables-container">
+      <block wx:for="{{displayTables}}" wx:key="id">
+        <view class="table-card card" data-id="{{item.id}}" bindtap="openDetail">
+          <view class="table-header">
+            <text class="table-name">{{item.name}}</text>
+            <view class="status-badge {{item.status}}">{{item.status === 'AVAILABLE' ? '空闲' : item.status === 'IN_USE' ? '使用中' : item.status === 'RESERVED' ? '已预约' : '故障'}}</view>
+          </view>
+          <view class="table-body">
+            <text class="price">￥{{item.pricePerHour || 30}}/小时</text>
+            <!-- 球桌号显示 -->
+            <text class="table-number">桌号：{{item.tableNumber > 0 ? item.tableNumber : item.id}}</text>
+
+            <!-- 预约时段提示文案 -->
+            <text wx:if="{{item.reserveTime}}" class="reserve-tip">{{item.reserveTime}} 已预约</text>
+            <!-- 动态使用温馨提示文案 -->
+            <text class="usage-tip">
+              {{item.status === 'AVAILABLE' ? (item.reserveTime && item.reserveTime.length > 0 ? '当前可开台，'+item.reserveTime+'前需结束使用' : '随时开台，无时间限制') : item.status === 'IN_USE' ? '当前正在使用，预计空闲后可开台/预约' : item.status === 'RESERVED' ? (item.reserveTime && item.reserveTime.length > 0 ? item.reserveTime+'已被预约，暂不可被他人占用' : '该时段已被预约，暂不可被他人占用') : '球台故障，暂无法使用，待工作人员维修'}}
+            </text>
+          </view>
+        </view>
+      </block>
+      
+      <block wx:if="{{displayTables.length === 0}}">
+        <view class="empty-state">
+          <view class="empty-text">暂无球桌数据</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+</view>
